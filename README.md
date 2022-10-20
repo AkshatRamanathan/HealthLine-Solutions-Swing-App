@@ -9,8 +9,8 @@ The system, community or hospital admins can modify or update data belonging to 
 
 ## Class Diagram
 
-![Class Diagram Link](https://drive.google.com/file/d/1Kxi9Wub2uoTHdUFggM71iBN-MZIAlXVM/view?usp=sharing)
+![Class Diagram Here](./images/ClassDiagram.png?raw=true)
 
 ## Sequence Diagram
-![Sequence Diagram link](https://drive.google.com/file/d/1XJghzlJ3bkeLXCeiChz3TPjzoSSVOtSO/view?usp=sharing)
-add link here
+
+![Sequence Diagram here](./images/SequenceDiagram.png?raw=true)
