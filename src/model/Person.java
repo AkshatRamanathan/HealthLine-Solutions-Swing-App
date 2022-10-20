@@ -16,6 +16,7 @@ public class Person {
     private String address;
     private long personId;
     private Community community;
+    private String type;
 
     /**
      *
@@ -26,13 +27,14 @@ public class Person {
      * @param personId
      * @param community
      */
-    public Person(String name, String emailId, long phoneNumber, String address, long personId, Community community) {
+    public Person(String name, String emailId, long phoneNumber, String address, long personId, Community community, String type) {
         this.name = name;
         this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.personId = personId;
         this.community = community;
+        this.type = type;
     }
 
     public String getName() {
@@ -57,6 +59,14 @@ public class Person {
 
     public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getAddress() {
