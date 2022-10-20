@@ -4,6 +4,8 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author akshb
@@ -15,6 +17,9 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        logoLabel.setText("");
+        logoLabel.setIcon(new ImageIcon("logo.jpg"));
+
     }
 
     /**
@@ -34,6 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
         bottomPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         otherLabel = new javax.swing.JLabel();
+        logoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +101,10 @@ public class MainScreen extends javax.swing.JFrame {
         bottomPanel.setLayout(bottomPanelLayout);
         bottomPanelLayout.setHorizontalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(bottomPanelLayout.createSequentialGroup()
+                .addGap(308, 308, 308)
+                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(306, Short.MAX_VALUE))
             .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
                     .addContainerGap(101, Short.MAX_VALUE)
@@ -109,7 +118,10 @@ public class MainScreen extends javax.swing.JFrame {
         );
         bottomPanelLayout.setVerticalGroup(
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGroup(bottomPanelLayout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(200, Short.MAX_VALUE))
             .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(bottomPanelLayout.createSequentialGroup()
                     .addGap(38, 38, 38)
@@ -179,6 +191,7 @@ public class MainScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainScreen().setVisible(true);
+
             }
         });
     }
@@ -188,6 +201,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton doctorButton;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel otherLabel;
     private javax.swing.JButton patientButton;
     private javax.swing.JLabel titleLabel;
