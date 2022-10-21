@@ -4,6 +4,8 @@
  */
 package view;
 
+import view.doctor.doctorScreen;
+import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,8 +19,6 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
-        logoLabel.setText("");
-        logoLabel.setIcon(new ImageIcon("logo.jpg"));
 
     }
 
@@ -36,16 +36,18 @@ public class MainScreen extends javax.swing.JFrame {
         patientButton = new javax.swing.JButton();
         doctorButton = new javax.swing.JButton();
         adminButton = new javax.swing.JButton();
-        bottomPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         otherLabel = new javax.swing.JLabel();
-        logoLabel = new javax.swing.JLabel();
+        bottomPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 685));
 
-        jSplitPane1.setDividerLocation(85);
+        jSplitPane1.setDividerLocation(185);
         jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        topPanel.setPreferredSize(new java.awt.Dimension(800, 185));
 
         patientButton.setText("Patient");
         patientButton.addActionListener(new java.awt.event.ActionListener() {
@@ -63,77 +65,54 @@ public class MainScreen extends javax.swing.JFrame {
 
         adminButton.setText("Admin");
 
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("HEALTHLINE SOLUTIONS");
+
+        otherLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        otherLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        otherLabel.setText("Please select one of the options below");
+
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap(152, Short.MAX_VALUE)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                        .addComponent(otherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addComponent(patientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127)
+                .addGap(134, 134, 134)
                 .addComponent(doctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(52, 52, 52))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(otherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(doctorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adminButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jSplitPane1.setTopComponent(topPanel);
 
-        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("WELCOME TO HEALTHLINE SOLUTIONS");
-
-        otherLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        otherLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        otherLabel.setText("Please select one of the options above");
-
-        javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
-        bottomPanel.setLayout(bottomPanelLayout);
-        bottomPanelLayout.setHorizontalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
-            .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                    .addContainerGap(101, Short.MAX_VALUE)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(88, 88, 88)))
-            .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                    .addContainerGap(109, Short.MAX_VALUE)
-                    .addComponent(otherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(80, 80, 80)))
-        );
-        bottomPanelLayout.setVerticalGroup(
-            bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bottomPanelLayout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
-            .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(bottomPanelLayout.createSequentialGroup()
-                    .addGap(38, 38, 38)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(292, Short.MAX_VALUE)))
-            .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanelLayout.createSequentialGroup()
-                    .addContainerGap(328, Short.MAX_VALUE)
-                    .addComponent(otherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(128, 128, 128)))
-        );
-
+        bottomPanel.setPreferredSize(new java.awt.Dimension(800, 500));
+        bottomPanel.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(bottomPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,7 +125,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1))
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,6 +137,10 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed
         // TODO add your handling code here:
+        doctorScreen doctorScreen = new doctorScreen(bottomPanel);
+        bottomPanel.add("DoctorScreen", doctorScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_doctorButtonActionPerformed
 
     /**
@@ -201,7 +184,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton doctorButton;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel otherLabel;
     private javax.swing.JButton patientButton;
     private javax.swing.JLabel titleLabel;
