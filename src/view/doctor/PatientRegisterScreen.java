@@ -92,6 +92,10 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        doctorScreen doctorScreen = new doctorScreen(bottomPanel);
+        bottomPanel.add("DoctorScreen", doctorScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void existingPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingPatientButtonActionPerformed
