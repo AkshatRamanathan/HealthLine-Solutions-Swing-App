@@ -8,7 +8,7 @@ package model;
  *
  * @author akshb
  */
-class Community {
+public class Community {
 
     private String city;
     private String country;

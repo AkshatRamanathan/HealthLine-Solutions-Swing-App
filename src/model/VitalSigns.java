@@ -4,13 +4,14 @@
  */
 package model;
 
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 
 /**
  *
  * @author akshb
  */
-class VitalSigns {
+public class VitalSigns {
 
     private int temperature;
     private int bloodPressure;
@@ -54,6 +55,10 @@ class VitalSigns {
         this.bloodPressure = bloodPressure;
         this.pulse = pulse;
         this.dateOfVitalEntry = dateOfVitalEntry;
+    }
+
+    public void setDateOfVitalEntry(JDateChooser jDateChooser1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
