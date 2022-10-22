@@ -4,6 +4,7 @@
  */
 package view.doctor;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -41,6 +42,11 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
         subTitleLabel1.setText("Please Select the type of Patient");
 
         existingPatientButton.setText("Existing Patient");
+        existingPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                existingPatientButtonActionPerformed(evt);
+            }
+        });
 
         newPatientButton.setText("New Patient");
 
@@ -87,6 +93,14 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void existingPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingPatientButtonActionPerformed
+        // TODO add your handling code here:
+        ExistingPatientScreen existingPatientSelection = new ExistingPatientScreen(bottomPanel);
+        bottomPanel.add("ExistingPatientScreen", existingPatientSelection);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_existingPatientButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
