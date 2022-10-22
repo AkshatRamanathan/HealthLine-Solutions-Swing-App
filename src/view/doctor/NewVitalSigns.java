@@ -5,8 +5,10 @@
 package view.doctor;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Person;
 import model.VitalSigns;
+
 /**
  *
  * @author bharv
@@ -16,9 +18,10 @@ public class NewVitalSigns extends javax.swing.JPanel {
     /**
      * Creates new form NewVitalSigns
      */
-    VitalSigns user;
-    public NewVitalSigns(VitalSigns user) {
-        this.user = user;
+    JPanel bottomPanel;
+
+    public NewVitalSigns(JPanel bottomPanel) {
+        this.bottomPanel = bottomPanel;
         initComponents();
     }
 
@@ -78,9 +81,9 @@ public class NewVitalSigns extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(245, 245, 245)
+                .addGap(246, 246, 246)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(phoneNumber)
                     .addComponent(emailID)
@@ -96,15 +99,15 @@ public class NewVitalSigns extends javax.swing.JPanel {
                             .addComponent(TempText)
                             .addComponent(BPText)
                             .addComponent(PulseText)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))))
-                .addContainerGap(256, Short.MAX_VALUE))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name)
                     .addComponent(TempText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -122,19 +125,19 @@ public class NewVitalSigns extends javax.swing.JPanel {
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(SaveBtn)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
-        
-        user.setTemperature(Integer.parseInt(TempText.getText()));
-        user.setBloodPressure(Integer.parseInt(BPText.getText()));
-        user.setPulse(Integer.parseInt(PulseText.getText()));
-        user.setDateOfVitalEntry(jDateChooser1.getDate());
-        
-        JOptionPane.showMessageDialog(this,"New Vital Signs Saved!");
+        VitalSigns userVitals = new VitalSigns();
+        userVitals.setTemperature(Integer.parseInt(TempText.getText()));
+        userVitals.setBloodPressure(Integer.parseInt(BPText.getText()));
+        userVitals.setPulse(Integer.parseInt(PulseText.getText()));
+        userVitals.setDateOfVitalEntry(jDateChooser1.getDate());
+        JOptionPane.showMessageDialog(this, "New Vital Signs Saved as new Encounter!");
+        //add this into encounters of the hospital of the perticular community
 
     }//GEN-LAST:event_SaveBtnActionPerformed
 
@@ -159,4 +162,8 @@ public class NewVitalSigns extends javax.swing.JPanel {
     private javax.swing.JLabel personID;
     private javax.swing.JLabel phoneNumber;
     // End of variables declaration//GEN-END:variables
+
+    private NewVitalSigns() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

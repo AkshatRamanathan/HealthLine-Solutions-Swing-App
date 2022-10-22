@@ -4,7 +4,9 @@
  */
 package view.doctor;
 
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import model.Person;
 import model.Community;
 
@@ -17,10 +19,10 @@ public class NewPatient extends javax.swing.JPanel {
     /**
      * Creates new form NewPatient
      */
-    Person user;
+    JPanel bottomPanel;
 
-    public NewPatient(Person user) {
-        this.user = user;
+    public NewPatient(JPanel bottomPanel) {
+        this.bottomPanel = bottomPanel;
         initComponents();
     }
 
@@ -49,6 +51,7 @@ public class NewPatient extends javax.swing.JPanel {
         CT = new javax.swing.JTextField();
         COT = new javax.swing.JTextField();
         SaveBtn = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,13 +97,25 @@ public class NewPatient extends javax.swing.JPanel {
             }
         });
 
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(245, 245, 245)
+                .addGap(23, 23, 23)
+                .addComponent(backButton)
+                .addGap(88, 88, 88)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addGap(109, 109, 109))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(244, 244, 244)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(city)
                     .addComponent(country)
@@ -111,9 +126,6 @@ public class NewPatient extends javax.swing.JPanel {
                     .addComponent(name))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SaveBtn))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(COT)
@@ -121,16 +133,21 @@ public class NewPatient extends javax.swing.JPanel {
                             .addComponent(PIDT)
                             .addComponent(PNT)
                             .addComponent(EMIDT)
-                            .addComponent(NT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(ADT, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(254, Short.MAX_VALUE))
+                            .addComponent(NT, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ADT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SaveBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name)
                     .addComponent(NT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,8 +176,8 @@ public class NewPatient extends javax.swing.JPanel {
                     .addComponent(country)
                     .addComponent(COT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(SaveBtn)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addComponent(SaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,20 +191,34 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
-        
+
+        Person user = new Person();
         user.setName(NT.getText());
         user.setEmailId(EMIDT.getText());
         user.setPhoneNumber(Long.parseLong(PNT.getText()));
         user.setAddress(ADT.getText());
         user.setPersonId(Long.parseLong(PIDT.getText()));
-        Community newCommunity = new Community("CIT","COT");
+        Community newCommunity = new Community("CIT", "COT");
         user.setCommunity(newCommunity);
-        JOptionPane.showMessageDialog(this,"New Patient Information Saved!");
+        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
+        //navigate to screen-2C with "user object" created here
+        NewVitalSigns newVitalSignsScreen = new NewVitalSigns(bottomPanel);
+        bottomPanel.add("NewVitalSignsScreen", newVitalSignsScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void ADTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ADTActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
+        bottomPanel.add("patientScreen", patientRegister);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,6 +231,7 @@ public class NewPatient extends javax.swing.JPanel {
     private javax.swing.JTextField PNT;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel address;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel city;
     private javax.swing.JLabel country;
     private javax.swing.JLabel emailID;

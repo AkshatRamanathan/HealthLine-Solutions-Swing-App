@@ -18,24 +18,24 @@ public class Person {
     private Community community;
     private String type;
 
-    /**
-     *
-     * @param name
-     * @param emailId
-     * @param phoneNumber
-     * @param address
-     * @param personId
-     * @param community
-     */
-    public Person(String name, String emailId, long phoneNumber, String address, long personId, Community community, String type) {
-        this.name = name;
-        this.emailId = emailId;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.personId = personId;
-        this.community = community;
-        this.type = type;
-    }
+//    /**
+//     *
+//     * @param name
+//     * @param emailId
+//     * @param phoneNumber
+//     * @param address
+//     * @param personId
+//     * @param community
+//     */
+//    public Person(String name, String emailId, long phoneNumber, String address, long personId, Community community, String type) {
+//        this.name = name;
+//        this.emailId = emailId;
+//        this.phoneNumber = phoneNumber;
+//        this.address = address;
+//        this.personId = personId;
+//        this.community = community;
+//        this.type = type;
+//    }
 
     public String getName() {
         return name;
