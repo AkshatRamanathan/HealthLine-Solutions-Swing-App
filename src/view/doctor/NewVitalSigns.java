@@ -137,7 +137,7 @@ public class NewVitalSigns extends javax.swing.JPanel {
         userVitals.setPulse(Integer.parseInt(PulseText.getText()));
         userVitals.setDateOfVitalEntry(jDateChooser1.getDate());
         JOptionPane.showMessageDialog(this, "New Vital Signs Saved as new Encounter!");
-        //add this into encounters of the hospital of the perticular community
+        //create encounter, add this into encounters of the hospital of the perticular community
 
     }//GEN-LAST:event_SaveBtnActionPerformed
 

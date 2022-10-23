@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.UUID;
+
 /**
  *
  * @author akshb
@@ -13,29 +15,10 @@ public class Person {
     private String name;
     private String emailId;
     private long phoneNumber;
-    private String address;
-    private long personId;
+    private UUID personId;
     private Community community;
-    private String type;
-
-//    /**
-//     *
-//     * @param name
-//     * @param emailId
-//     * @param phoneNumber
-//     * @param address
-//     * @param personId
-//     * @param community
-//     */
-//    public Person(String name, String emailId, long phoneNumber, String address, long personId, Community community, String type) {
-//        this.name = name;
-//        this.emailId = emailId;
-//        this.phoneNumber = phoneNumber;
-//        this.address = address;
-//        this.personId = personId;
-//        this.community = community;
-//        this.type = type;
-//    }
+    private House house;
+    private City city;
 
     public String getName() {
         return name;
@@ -61,27 +44,11 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public long getPersonId() {
+    public UUID getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(UUID personId) {
         this.personId = personId;
     }
 
@@ -91,6 +58,22 @@ public class Person {
 
     public void setCommunity(Community community) {
         this.community = community;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
 }

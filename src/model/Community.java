@@ -10,28 +10,28 @@ package model;
  */
 public class Community {
 
-    private String city;
-    private String country;
+    private String areaName;
+    private String district;
 
-    public String getCity() {
-        return city;
+    public Community(String areaName, String district) {
+        this.areaName = areaName;
+        this.district = district;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public String getCountry() {
-        return country;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public String getDistrict() {
+        return district;
     }
 
-    public Community(String city, String country) {
-        this.city = city;
-        this.country = country;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
 }
