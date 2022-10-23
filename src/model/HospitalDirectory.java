@@ -22,7 +22,12 @@ public class HospitalDirectory {
         this.hospitals = hospitals;
     }
 
-    public HospitalDirectory(ArrayList<Hospital> hospitals) {
-        this.hospitals = hospitals;
+    public void addHospital(Hospital hospital) {
+        this.hospitals.add(hospital);
     }
+
+    public void deleteHospital(Hospital hospital) {
+        this.hospitals.remove(hospital);
+    }
+
 }

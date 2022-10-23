@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author akshb
  */
-class VitalSigns {
+public class VitalSigns {
 
     private int temperature;
     private int bloodPressure;
@@ -46,13 +46,6 @@ class VitalSigns {
     }
 
     public void setDateOfVitalEntry(Date dateOfVitalEntry) {
-        this.dateOfVitalEntry = dateOfVitalEntry;
-    }
-
-    public VitalSigns(int temperature, int bloodPressure, int pulse, Date dateOfVitalEntry) {
-        this.temperature = temperature;
-        this.bloodPressure = bloodPressure;
-        this.pulse = pulse;
         this.dateOfVitalEntry = dateOfVitalEntry;
     }
 

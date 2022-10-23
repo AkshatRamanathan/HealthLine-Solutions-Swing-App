@@ -22,8 +22,11 @@ public class EncounterDirectory {
         this.encounter = encounter;
     }
 
-    public EncounterDirectory(ArrayList<Encounter> encounter) {
-        this.encounter = encounter;
+    public void addEncounter(Encounter encounter) {
+        this.encounter.add(encounter);
     }
 
+    public void deleteEncounter(Encounter encounter) {
+        this.encounter.remove(encounter);
+    }
 }

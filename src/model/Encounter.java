@@ -10,24 +10,24 @@ package model;
  */
 public class Encounter {
 
-    private long doctorId;
-    private long patientId;
+    private Patient patient;
+    private Doctor doctor;
     private VitalSigns vitals;
 
-    public long getDoctorId() {
-        return doctorId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setDoctorId(long doctorId) {
-        this.doctorId = doctorId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public long getPatientId() {
-        return patientId;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setPatientId(long patientId) {
-        this.patientId = patientId;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public VitalSigns getVitals() {
@@ -35,12 +35,6 @@ public class Encounter {
     }
 
     public void setVitals(VitalSigns vitals) {
-        this.vitals = vitals;
-    }
-
-    public Encounter(long doctorId, long patientId, VitalSigns vitals) {
-        this.doctorId = doctorId;
-        this.patientId = patientId;
         this.vitals = vitals;
     }
 

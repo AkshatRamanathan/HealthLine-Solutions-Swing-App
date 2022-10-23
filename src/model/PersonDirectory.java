@@ -22,8 +22,11 @@ public class PersonDirectory {
         this.persons = persons;
     }
 
-    public PersonDirectory(ArrayList<Person> persons) {
-        this.persons = persons;
+    public void addPersons(Person person) {
+        this.persons.add(person);
     }
 
+    public void deletePersons(Person person) {
+        this.persons.remove(person);
+    }
 }

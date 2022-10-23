@@ -49,6 +49,11 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
         });
 
         newPatientButton.setText("New Patient");
+        newPatientButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPatientButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +97,10 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        doctorScreen doctorScreen = new doctorScreen(bottomPanel);
+        bottomPanel.add("DoctorScreen", doctorScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void existingPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingPatientButtonActionPerformed
@@ -101,6 +110,14 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_existingPatientButtonActionPerformed
+
+    private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
+        // TODO add your handling code here:
+        NewPatient newPatientScreen = new NewPatient(bottomPanel);
+        bottomPanel.add("NewPatientScreen", newPatientScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_newPatientButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

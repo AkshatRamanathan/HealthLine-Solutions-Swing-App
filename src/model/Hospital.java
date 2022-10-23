@@ -11,18 +11,10 @@ package model;
 public class Hospital {
 
     private String hospitalName;
-    private String hospitalAddress;
+    private City hospitalCity;
+    private Community hospitalCommunity;
     private EncounterDirectory encounters;
-    private Community community;
-    private PersonDirectory persons; //only doctors
-
-    public Hospital(String hospitalName, String hospitalAddress, EncounterDirectory encounters, Community community, PersonDirectory persons) {
-        this.hospitalName = hospitalName;
-        this.hospitalAddress = hospitalAddress;
-        this.encounters = encounters;
-        this.community = community;
-        this.persons = persons;
-    }
+    private DoctorDirectory doctors;
 
     public String getHospitalName() {
         return hospitalName;
@@ -32,12 +24,20 @@ public class Hospital {
         this.hospitalName = hospitalName;
     }
 
-    public String getHospitalAddress() {
-        return hospitalAddress;
+    public City getHospitalCity() {
+        return hospitalCity;
     }
 
-    public void setHospitalAddress(String hospitalAddress) {
-        this.hospitalAddress = hospitalAddress;
+    public void setHospitalCity(City hospitalCity) {
+        this.hospitalCity = hospitalCity;
+    }
+
+    public Community getHospitalCommunity() {
+        return hospitalCommunity;
+    }
+
+    public void setHospitalCommunity(Community hospitalCommunity) {
+        this.hospitalCommunity = hospitalCommunity;
     }
 
     public EncounterDirectory getEncounters() {
@@ -48,20 +48,12 @@ public class Hospital {
         this.encounters = encounters;
     }
 
-    public Community getCommunity() {
-        return community;
+    public DoctorDirectory getDoctors() {
+        return doctors;
     }
 
-    public void setCommunity(Community community) {
-        this.community = community;
-    }
-
-    public PersonDirectory getPersons() {
-        return persons;
-    }
-
-    public void setPersons(PersonDirectory persons) {
-        this.persons = persons;
+    public void setDoctors(DoctorDirectory doctors) {
+        this.doctors = doctors;
     }
 
 }
