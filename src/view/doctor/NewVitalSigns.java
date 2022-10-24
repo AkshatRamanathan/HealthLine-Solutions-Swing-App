@@ -37,10 +37,10 @@ public class NewVitalSigns extends javax.swing.JPanel {
         BPText = new javax.swing.JTextField();
         PulseText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        name = new javax.swing.JLabel();
-        emailID = new javax.swing.JLabel();
-        phoneNumber = new javax.swing.JLabel();
-        personID = new javax.swing.JLabel();
+        temperature = new javax.swing.JLabel();
+        bloodPressure = new javax.swing.JLabel();
+        pulse = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
         SaveBtn = new javax.swing.JButton();
         TempText = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
@@ -55,13 +55,13 @@ public class NewVitalSigns extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Enter New Vital Signs");
 
-        name.setText("Temperature:");
+        temperature.setText("Temperature:");
 
-        emailID.setText("Blood Pressure:");
+        bloodPressure.setText("Blood Pressure:");
 
-        phoneNumber.setText("Pulse:");
+        pulse.setText("Pulse:");
 
-        personID.setText("Date:");
+        date.setText("Date:");
 
         SaveBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         SaveBtn.setText("Save Vital Signs");
@@ -85,10 +85,10 @@ public class NewVitalSigns extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(246, 246, 246)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(phoneNumber)
-                    .addComponent(emailID)
-                    .addComponent(name)
-                    .addComponent(personID))
+                    .addComponent(pulse)
+                    .addComponent(bloodPressure)
+                    .addComponent(temperature)
+                    .addComponent(date))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -109,19 +109,19 @@ public class NewVitalSigns extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(name)
+                    .addComponent(temperature)
                     .addComponent(TempText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BPText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailID))
+                    .addComponent(bloodPressure))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneNumber)
+                    .addComponent(pulse)
                     .addComponent(PulseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(personID)
+                    .addComponent(date)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(SaveBtn)
@@ -155,12 +155,12 @@ public class NewVitalSigns extends javax.swing.JPanel {
     private javax.swing.JTextField PulseText;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JTextField TempText;
-    private javax.swing.JLabel emailID;
+    private javax.swing.JLabel bloodPressure;
+    private javax.swing.JLabel date;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel name;
-    private javax.swing.JLabel personID;
-    private javax.swing.JLabel phoneNumber;
+    private javax.swing.JLabel pulse;
+    private javax.swing.JLabel temperature;
     // End of variables declaration//GEN-END:variables
 
     private NewVitalSigns() {

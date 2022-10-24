@@ -7,6 +7,7 @@ package view;
 import view.doctor.doctorScreen;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
+import view.admin.adminScreen;
 
 /**
  *
@@ -64,6 +65,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         adminButton.setText("Admin");
+        adminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminButtonActionPerformed(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -142,6 +148,14 @@ public class MainScreen extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_doctorButtonActionPerformed
+
+    private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
+        // TODO add your handling code here:
+        adminScreen adminScreen = new adminScreen(bottomPanel);
+        bottomPanel.add("AdminScreen", adminScreen);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_adminButtonActionPerformed
 
     /**
      * @param args the command line arguments
