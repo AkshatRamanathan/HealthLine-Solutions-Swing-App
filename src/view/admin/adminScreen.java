@@ -4,6 +4,7 @@
  */
 package view.admin;
 
+import java.util.UUID;
 import javax.swing.JPanel;
 import model.Admin;
 
@@ -22,8 +23,6 @@ public class adminScreen extends javax.swing.JPanel {
         initComponents();
         this.bottomPanel = bottomPanel;
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,11 +127,11 @@ public class adminScreen extends javax.swing.JPanel {
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
-        
+
         Admin admin = new Admin();
         admin.setType((String) adminTypeDrpdwn.getSelectedItem());
-        admin.setPersonId(Integer.parseInt(adminIDText.getText()));
-        
+        admin.setPersonId(UUID.fromString((adminIDText.getText())));
+
 //        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
 //        bottomPanel.add("patientScreen", patientRegister);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
