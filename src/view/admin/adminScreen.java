@@ -4,6 +4,7 @@
  */
 package view.admin;
 
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import model.Admin;
 
@@ -131,7 +132,12 @@ public class adminScreen extends javax.swing.JPanel {
         
         Admin admin = new Admin();
         admin.setType((String) adminTypeDrpdwn.getSelectedItem());
-        admin.setPersonId(Integer.parseInt(adminIDText.getText()));
+//        admin.setPersonId(Integer.parseInt(adminIDText.getText()));
+        
+        patientScreen patient = new patientScreen(bottomPanel);
+        bottomPanel.add("patientScreen", patient);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
         
 //        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
 //        bottomPanel.add("patientScreen", patientRegister);
