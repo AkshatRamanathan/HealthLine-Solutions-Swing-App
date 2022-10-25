@@ -45,9 +45,9 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel10" alignment="0" min="-2" pref="989" max="-2" attributes="0"/>
+                  <Component id="jLabel10" min="-2" pref="989" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="btnView" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -74,9 +74,9 @@
               <Component id="btnView" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Component id="doctorViewPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="hospitalViewPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="266" max="32767" attributes="0"/>
+              <EmptySpace pref="200" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,7 +136,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="jLabel12" min="-2" pref="109" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" pref="109" max="-2" attributes="0"/>
@@ -148,13 +148,17 @@
                                   <Component id="jLabel2" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="jLabel13" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtDrAreaName" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
                                   <Component id="txtDrEmail" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <Component id="txtDrAddress" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
                                   <Component id="txtDrCity" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                                  <Component id="txtDrCountry2" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="txtDrHouse" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="txtDrDistrict1" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Component id="txtDrPhoneNo" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -174,7 +178,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDrEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -184,14 +188,24 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrCountry2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDrHouse" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtDrAreaName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDrDistrict1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDrPhoneNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -202,14 +216,14 @@
             <Property name="text" type="java.lang.String" value="Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrAddress">
+        <Component class="javax.swing.JTextField" name="txtDrEmail">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrAddressActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrEmailActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Address"/>
+            <Property name="text" type="java.lang.String" value="Email ID"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDrName">
@@ -222,14 +236,14 @@
             <Property name="text" type="java.lang.String" value="City"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrEmail">
+        <Component class="javax.swing.JTextField" name="txtDrAreaName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrEmailActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrAreaNameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Country"/>
+            <Property name="text" type="java.lang.String" value="House"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDrCity">
@@ -239,12 +253,32 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Email ID"/>
+            <Property name="text" type="java.lang.String" value="Area Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrCountry2">
+        <Component class="javax.swing.JTextField" name="txtDrHouse">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrCountry2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrHouseActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel12">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Phone Number"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtDrPhoneNo">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrPhoneNoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="District"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtDrDistrict1">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrDistrict1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -259,20 +293,22 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" pref="109" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="txtDrName1" min="-2" pref="153" max="-2" attributes="0"/>
+                          <EmptySpace pref="29" max="32767" attributes="0"/>
+                          <Component id="txtHospitalName" min="-2" pref="153" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel6" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                              <Component id="jLabel11" min="-2" pref="109" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtDrCountry1" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                              <Component id="txtDrAddress1" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                              <Component id="txtDrCity1" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtHospitalDistrict" alignment="0" pref="153" max="32767" attributes="0"/>
+                              <Component id="txtHospitalAddress" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtHospitalAreaName" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtHospitalDoctors" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -285,25 +321,35 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrName1" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="txtHospitalName" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrAddress1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHospitalAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrCity1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHospitalAreaName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDrCountry1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtHospitalDistrict" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="txtHospitalDoctors" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -311,43 +357,50 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Name"/>
+            <Property name="text" type="java.lang.String" value="Hospital Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrAddress1">
+        <Component class="javax.swing.JTextField" name="txtHospitalAddress">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrAddress1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHospitalAddressActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Address"/>
+            <Property name="text" type="java.lang.String" value="City"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrName1">
+        <Component class="javax.swing.JTextField" name="txtHospitalName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrName1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHospitalNameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="City"/>
+            <Property name="text" type="java.lang.String" value="Area Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrCountry1">
+        <Component class="javax.swing.JTextField" name="txtHospitalDistrict">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrCountry1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHospitalDistrictActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Country"/>
+            <Property name="text" type="java.lang.String" value="Doctors"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtDrCity1">
+        <Component class="javax.swing.JTextField" name="txtHospitalAreaName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDrCity1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHospitalAreaNameActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel11">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="District"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtHospitalDoctors">
         </Component>
       </SubComponents>
     </Container>
@@ -384,13 +437,36 @@
             <Component class="javax.swing.JTable" name="doctorTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="4">
+                  <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Address" type="java.lang.Object"/>
-                    <Column editable="true" title="City" type="java.lang.Object"/>
-                    <Column editable="true" title="Country" type="java.lang.Object"/>
                     <Column editable="true" title="Email" type="java.lang.Object"/>
+                    <Column editable="true" title="Phone No" type="java.lang.Object"/>
+                    <Column editable="true" title="City" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -436,10 +512,34 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Address" type="java.lang.Object"/>
                     <Column editable="true" title="City" type="java.lang.Object"/>
-                    <Column editable="true" title="Country" type="java.lang.Object"/>
+                    <Column editable="true" title="Area" type="java.lang.Object"/>
+                    <Column editable="true" title="District" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
