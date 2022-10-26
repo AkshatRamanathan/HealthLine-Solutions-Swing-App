@@ -211,10 +211,10 @@ public class NewPatient extends javax.swing.JPanel {
         House house = new House();
         house.setHouseNumber(Integer.parseInt(houseNumField.getText()));
         house.setRoadName(roadField.getText());
-        Community newCommunity = new Community(areaField.getText(), districtField.getText());
-        patient.setCommunity(newCommunity);
-        City newCity = new City(cityField.getText(), pincodeField.getText());
-        patient.setCity(newCity);
+//        Community newCommunity = new Community(areaField.getText(), districtField.getText());
+//        patient.setCommunity(newCommunity);
+//        City newCity = new City(cityField.getText(), pincodeField.getText());
+//        patient.setCity(newCity);
         JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
         //navigate to screen-2C with "patient object" created here
 

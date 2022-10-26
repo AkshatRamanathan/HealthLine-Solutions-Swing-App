@@ -53,5 +53,9 @@ public class City {
         this.pinCode = pinCode;
         this.communityDirectory = new ArrayList<>();
     }
+    
+   public City() {
+        
+    }
 
 }

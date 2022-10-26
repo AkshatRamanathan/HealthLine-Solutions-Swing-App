@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import model.City;
+import model.MainSystem;
 
 /**
  *
@@ -21,11 +23,13 @@ public class PatientPanel extends javax.swing.JPanel {
      */
     String selectedCity = "";
     String selectedCommunity = "";
+    MainSystem rootDataObj;
     private JPanel bottomPanel;
-    public PatientPanel(JPanel bottomPanel) {
+    public PatientPanel(JPanel bottomPanel, MainSystem rootDataObj) {
         initComponents();
-        populateDoctorTableData();
         this.bottomPanel = bottomPanel;
+        this.rootDataObj = rootDataObj;
+        populateDoctorTableData();
     }
 
     /**
@@ -399,7 +403,9 @@ public class PatientPanel extends javax.swing.JPanel {
 
     
     private void populateDoctorTableData() {
-        cityDropdown.addItem("Deva");
+        for(City cityObj: this.rootDataObj.getRootCityDirectory()){
+            cityDropdown.addItem(cityObj.getCityName());
+        }
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
         model.setRowCount(0);
         
