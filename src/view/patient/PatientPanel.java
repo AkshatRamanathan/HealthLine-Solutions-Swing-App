@@ -400,7 +400,6 @@ public class PatientPanel extends javax.swing.JPanel {
     
     private void populateDoctorTableData() {
         cityDropdown.addItem("Deva");
-        cityDropdown.addItem("Sheriff");
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
         model.setRowCount(0);
         
