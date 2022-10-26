@@ -8,6 +8,16 @@ package model;
  *
  * @author akshb
  */
-class Doctor extends Person{
-    
+class Doctor extends Person {
+
+    private Hospital hospitalName;
+
+    public Hospital getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(Hospital hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
 }
