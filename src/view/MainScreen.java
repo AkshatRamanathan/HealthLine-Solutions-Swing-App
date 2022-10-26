@@ -8,6 +8,8 @@ import view.doctor.doctorScreen;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 import view.patient.PatientPanel;
+import model.System;
+
 
 /**
  *
@@ -20,6 +22,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     public MainScreen() {
         initComponents();
+        System rootDataObj = new System();
 
     }
 

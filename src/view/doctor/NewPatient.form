@@ -32,10 +32,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="roadLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="address" min="-2" max="-2" attributes="0"/>
+                          <Component id="phoneLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="phoneField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="emailField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="nameField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="address" max="32767" attributes="0"/>
+                                  <Component id="roadLabel" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -43,37 +55,21 @@
                                   <Component id="houseNumField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="phoneLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cityLabel" max="32767" attributes="0"/>
+                                  <Component id="communityLabel" pref="80" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="phoneField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="emailField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nameField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="cityDropdown" pref="200" max="32767" attributes="0"/>
+                                  <Component id="communityDropdown" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="districtLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="areaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pincodeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pincodeField" max="32767" attributes="0"/>
-                          <Component id="cityField" max="32767" attributes="0"/>
-                          <Component id="districtField" max="32767" attributes="0"/>
-                          <Component id="areaField" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,39 +82,43 @@
                   <Component id="backButton" alignment="3" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="areaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="areaField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="districtLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="districtField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="address" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="houseNumField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="roadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="roadField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="phoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="phoneField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cityField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cityDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="address" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="houseNumField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="pincodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="pincodeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="communityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="communityDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="roadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="roadField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Component id="SaveBtn" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace pref="211" max="32767" attributes="0"/>
           </Group>
@@ -160,11 +160,6 @@
         <Property name="text" type="java.lang.String" value="Road Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="areaLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Area Name"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="nameField">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameFieldActionPerformed"/>
@@ -180,8 +175,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="roadField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="areaField">
     </Component>
     <Component class="javax.swing.JButton" name="SaveBtn">
       <Properties>
@@ -202,26 +195,38 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="districtLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="District"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="districtField">
-    </Component>
     <Component class="javax.swing.JLabel" name="cityLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="City"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="cityField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="pincodeLabel">
+    <Component class="javax.swing.JLabel" name="communityLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PIN Code"/>
+        <Property name="text" type="java.lang.String" value="Community"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="pincodeField">
+    <Component class="javax.swing.JComboBox" name="cityDropdown">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="communityDropdown">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
