@@ -54,7 +54,7 @@ public class City {
         this.communityDirectory = new ArrayList<>();
     }
     
-   public City() {
+    public City() {
         
     }
 

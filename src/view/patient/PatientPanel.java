@@ -405,30 +405,14 @@ public class PatientPanel extends javax.swing.JPanel {
     private void populateDoctorTableData() {
         for(City cityObj: this.rootDataObj.getRootCityDirectory()){
             cityDropdown.addItem(cityObj.getCityName());
+            System.out.println(cityObj.getCommunityDirectory());
         }
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
         model.setRowCount(0);
         
-//      get from Doctor directory
-//        PersonDirectory newList = new PersonDirectory();
-//        Person per1 = newList.addNewPerson();
-//        per1.setName("Devadharshini");
-//        per1.setAddress("545 Sherborne");
-//        per1.setEmailId("deva@gmail.com");
-//        per1.setPhoneNumber(1234567890);
-//        per1.setType("Doctor");
-//        per1.setPersonId(1345);
-//        
-//        Person per2 = newList.addNewPerson();
-//        per2.setName("Bharvi");
-//        per2.setAddress("2 Valdane Dr");
-//        per2.setEmailId("bharvi@gmail.com");
-//        per2.setPhoneNumber(232948991);
-//        per2.setType("Doctor");
-//        per2.setPersonId(3412);
-
-
-//        for (Person person: PersonDirectory.getPersons()){
+        for(City cityObj: this.rootDataObj.getRootCityDirectory()){
+            
+        }
 //        for (Person person: newList.getPersons()){
 //            Object[] row = new Object[5];
 //            row[0] = person.getName();
