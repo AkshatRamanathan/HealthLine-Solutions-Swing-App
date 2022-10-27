@@ -6,6 +6,7 @@ package view.doctor;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.MainSystem;
 
 /**
  *
@@ -17,10 +18,12 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
      * @param bottomPanel the value of bottomPanel
      */
     private JPanel bottomPanel;
+    private MainSystem rootDataObj;
 
-    public ExistingPatientScreen(JPanel bottomPanel) {
+    public ExistingPatientScreen(JPanel bottomPanel, MainSystem rootDataObj) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.rootDataObj = rootDataObj;
     }
 
     /**
@@ -135,7 +138,7 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
+        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, rootDataObj);
         bottomPanel.add("patientScreen", patientRegister);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

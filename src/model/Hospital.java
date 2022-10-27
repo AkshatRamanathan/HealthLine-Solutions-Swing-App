@@ -56,4 +56,9 @@ public class Hospital {
         this.doctors = doctors;
     }
 
+    @Override
+    public String toString() {
+        return hospitalName;
+    }
+
 }

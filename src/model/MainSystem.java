@@ -56,45 +56,45 @@ public class MainSystem {
         this.rootHospitalDirectory = rootHospitalDirectory;
     }
 
-     public House createHouseFn(int houseNo, String roadName) {
+    public House createHouseFn(int houseNo, String roadName) {
         House newHouse = new House();
         newHouse.setRoadName(roadName);
         newHouse.setHouseNumber(houseNo);
         return newHouse;
     }
-    
+
     public Community createCommunityFn(String area, String district) {
         Community newCommunity = new Community();
         newCommunity.setAreaName(area);
         newCommunity.setDistrict(district);
         return newCommunity;
     }
-    
-    public City createCityFn(String cityName, String pincode){
+
+    public City createCityFn(String cityName, String pincode) {
         City newCity = new City();
         newCity.setCityName(cityName);
         newCity.setPinCode(pincode);
         return newCity;
     }
-    
-    public City createCityFn(String cityName, String pincode, String comArea1, String comDistrict1){
+
+    public City createCityFn(String cityName, String pincode, String comArea1, String comDistrict1) {
         City newCity = new City();
         newCity.setCityName(cityName);
         newCity.setPinCode(pincode);
         ArrayList<Community> newCommDirectory = new ArrayList<>();
         newCity.setCommunityDirectory(newCommDirectory);
-        
-        Community newCityCommunity1 = createCommunityFn(comArea1,comDistrict1);
-        Community newCityCommunity2 = createCommunityFn("A2","D2");
-        
+
+        Community newCityCommunity1 = createCommunityFn(comArea1, comDistrict1);
+        Community newCityCommunity2 = createCommunityFn("A2", "D2");
+
         newCommDirectory.add(newCityCommunity1);
         newCommDirectory.add(newCityCommunity2);
-        System.out.println(newCity);
-        
+//        System.out.println(newCity);
+
         return newCity;
     }
-    
-    public Doctor createDoctorFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city){
+
+    public Doctor createDoctorFn(String name, String emailId, long phoneNumber, UUID personId, Community community, House house, City city) {
         Doctor newPerson = new Doctor();
         newPerson.setName(name);
         newPerson.setEmailId(emailId);
@@ -105,8 +105,8 @@ public class MainSystem {
         newPerson.setCity(city);
         return newPerson;
     }
-    
-     public Patient createPatientFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city){
+
+    public Patient createPatientFn(String name, String emailId, long phoneNumber, UUID personId, Community community, House house, City city) {
         Patient newPerson = new Patient();
         newPerson.setName(name);
         newPerson.setEmailId(emailId);
@@ -117,8 +117,8 @@ public class MainSystem {
         newPerson.setCity(city);
         return newPerson;
     }
-    
-    public Encounter createEncounterFn(Doctor doctorEnc,Patient patientEnc){
+
+    public Encounter createEncounterFn(Doctor doctorEnc, Patient patientEnc) {
         Encounter newEnc = new Encounter();
         newEnc.setPatient(patientEnc);
         newEnc.setDoctor(doctorEnc);
@@ -128,75 +128,75 @@ public class MainSystem {
 
     private void populateCities() {
         // create 2 cities and add to rootHosp array with cityName, pincode, communityDir
-        City newCity1 = createCityFn("Toronto","M4X 1W5","Power St","Brampton");
-        City newCity2 = createCityFn("Montreal","R4X 1W5","A1","D1");
+        City newCity1 = createCityFn("Toronto", "M4X 1W5", "Power St", "Brampton");
+        City newCity2 = createCityFn("Montreal", "R4X 1W5", "A1", "D1");
         this.rootCityDirectory.add(newCity1);
-        this.rootCityDirectory.add(newCity2);   
+        this.rootCityDirectory.add(newCity2);
     }
-    
+
     private void populateHospitals() {
         // create 2 hospitals and add to rootHosp array with doctor dir (2), encDir, community, city
 //        HOSPITAL 1
         Hospital newHospital = new Hospital();
         newHospital.setHospitalName("Alpha Hospital");
         // city
-        City hospitalCity = createCityFn("Toronto","M4X 1W5");
-        newHospital.setHospitalCity(hospitalCity); 
-        
+        City hospitalCity = createCityFn("Toronto", "M4X 1W5");
+        newHospital.setHospitalCity(hospitalCity);
+
         // community
-        Community newCommunity = createCommunityFn("Sherbourne St","GTA");
+        Community newCommunity = createCommunityFn("Sherbourne St", "GTA");
         newHospital.setHospitalCommunity(newCommunity);
-        
+
         // doctor Dir
         DoctorDirectory newDoctorDirectory = new DoctorDirectory();
         newHospital.setDoctors(newDoctorDirectory);
-        Community doc1Community = createCommunityFn("Sherbourne St","GTA");
+        Community doc1Community = createCommunityFn("Sherbourne St", "GTA");
         // House doc1House = createHouseFn(101,"Main s ");
-        City doc1City = createCityFn("Toronto","M4X ZZZ");
-        
-        Doctor doctorObj1 = createDoctorFn("Dr Paul","paul.dr@gmail.com",1234567890,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"),doc1Community,null,doc1City);
-        
-        Community doc2Community = createCommunityFn("AAA St","Downtown");
+        City doc1City = createCityFn("Toronto", "M4X ZZZ");
+
+        Doctor doctorObj1 = createDoctorFn("Dr Paul", "paul.dr@gmail.com", 1234567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"), doc1Community, null, doc1City);
+
+        Community doc2Community = createCommunityFn("AAA St", "Downtown");
         // House doc2House = createHouseFn(301,"DDD");
-        City doc2City = createCityFn("Montreal","WW4XZ");
-        
-        Doctor doctorObj2 = createDoctorFn("Dr Henry","henry.dr@gmail.com",452167890,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4d"),doc2Community,null,doc2City);
-        
+        City doc2City = createCityFn("Montreal", "WW4XZ");
+
+        Doctor doctorObj2 = createDoctorFn("Dr Henry", "henry.dr@gmail.com", 452167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4d"), doc2Community, null, doc2City);
+
         newDoctorDirectory.addDoctor(doctorObj1);
         newDoctorDirectory.addDoctor(doctorObj2);
-        
-        
+
 //        HOSPITAL 2
         Hospital newHospital2 = new Hospital();
         newHospital2.setHospitalName("Global Hospital");
         // city
-        City hospitalCity2 = createCityFn("Vancouver","R4X 1W5");
-        newHospital2.setHospitalCity(hospitalCity2); 
-        
+        City hospitalCity2 = createCityFn("Montreal", "R4X 1W5");
+        newHospital2.setHospitalCity(hospitalCity2);
+
         // community
-        Community newCommunity2 = createCommunityFn("Dundas St","Dundas");
+        Community newCommunity2 = createCommunityFn("XYZ St", "GMA");
         newHospital2.setHospitalCommunity(newCommunity2);
-        
+
         // doctor Dir
         DoctorDirectory newDoctorDirectory2 = new DoctorDirectory();
         newHospital2.setDoctors(newDoctorDirectory2);
-        Community doc3Community = createCommunityFn("Sherbourne St","GTA");
+        Community doc3Community = createCommunityFn("XYZ St", "GMA");
         // House doc1House = createHouseFn(101,"Main s ");
-        City doc3City = createCityFn("Toronto","M4X ZZZ");
-        
-        Doctor doctorObj3 = createDoctorFn("Dr Vidhya","vidhya.dr@gmail.com",554567890,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"),doc3Community,null,doc3City);
-        
-        Community doc4Community = createCommunityFn("AAA St","Downtown");
+        City doc3City = createCityFn("Montreal", "M4X ZZZ");
+
+        Doctor doctorObj3 = createDoctorFn("Dr Vidhya", "vidhya.dr@gmail.com", 554567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5c"), doc3Community, null, doc3City);
+
+        Community doc4Community = createCommunityFn("BBB St", "Uptown");
         // House doc2House = createHouseFn(301,"DDD");
-        City doc4City = createCityFn("Montreal","WW4XZ");
-        
-        Doctor doctorObj4 = createDoctorFn("Dr Nandhini","nandhini.dr@gmail.com",772167890,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4d"),doc4Community,null,doc4City);
-        
+        City doc4City = createCityFn("Montreal", "WW4 DXZ");
+
+        Doctor doctorObj4 = createDoctorFn("Dr Nandhini", "nandhini.dr@gmail.com", 772167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5d"), doc4Community, null, doc4City);
+
         newDoctorDirectory2.addDoctor(doctorObj3);
         newDoctorDirectory2.addDoctor(doctorObj4);
-        
-        
-        
+
+        this.rootHospitalDirectory.add(newHospital);
+        this.rootHospitalDirectory.add(newHospital2);
+
 //        // encounter Dir
 //        EncounterDirectory newEncounterDirectory = new EncounterDirectory();
 //        newHospital.setEncounters(newEncounterDirectory);
@@ -219,8 +219,6 @@ public class MainSystem {
 //        System.out.println(newEncounter);
 //        
 //        newEncounterDirectory.addEncounter(newEncounter);
-        
-        
     }
 
 }

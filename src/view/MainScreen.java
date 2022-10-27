@@ -6,7 +6,6 @@ package view;
 
 import view.doctor.doctorScreen;
 import java.awt.CardLayout;
-import javax.swing.ImageIcon;
 import view.patient.PatientPanel;
 import model.MainSystem;
 
@@ -145,7 +144,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed
         // TODO add your handling code here:
-        doctorScreen doctorScreen = new doctorScreen(bottomPanel);
+        doctorScreen doctorScreen = new doctorScreen(bottomPanel,this.rootDataObj);
         bottomPanel.add("DoctorScreen", doctorScreen);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

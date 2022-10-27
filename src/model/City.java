@@ -53,9 +53,14 @@ public class City {
         this.pinCode = pinCode;
         this.communityDirectory = new ArrayList<>();
     }
-    
+
+    @Override
+    public String toString() {
+        return cityName;
+    }
+
     public City() {
-        
+
     }
 
 }

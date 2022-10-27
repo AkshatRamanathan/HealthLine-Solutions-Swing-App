@@ -5,12 +5,13 @@
 package view.doctor;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
-import model.Community;
 import model.House;
+import model.MainSystem;
 import model.Patient;
 
 /**
@@ -23,13 +24,17 @@ public class NewPatient extends javax.swing.JPanel {
      * Creates new form NewPatient
      */
     JPanel bottomPanel;
+    MainSystem rootDataObj;
 
-    public NewPatient(JPanel bottomPanel) {
+    public NewPatient(JPanel bottomPanel, MainSystem rootDataObj) {
         this.bottomPanel = bottomPanel;
         initComponents();
-        //loop over root cities and populate the dropdows for cities
-//        for(City c : root)
-        // based on city switch case, populate the drpdowns for community
+        this.rootDataObj = rootDataObj;
+        cityDropdown.removeAllItems();
+        communityDropdown.setEnabled(false);
+
+        optionPopulate();
+
     }
 
     /**
@@ -104,10 +109,18 @@ public class NewPatient extends javax.swing.JPanel {
 
         communityLabel.setText("Community");
 
-        cityDropdown.setSelectedIndex(-1);
+        cityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityDropdownActionPerformed(evt);
+            }
+        });
 
-        communityDropdown.setSelectedIndex(-1);
         communityDropdown.setEnabled(false);
+        communityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                communityDropdownActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,21 +216,13 @@ public class NewPatient extends javax.swing.JPanel {
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
 
-        Patient patient = new Patient();
-        patient.setName(nameField.getText());
-        patient.setEmailId(emailField.getText());
-        patient.setPhoneNumber(Long.parseLong(phoneField.getText()));
-        patient.setPersonId(UUID.randomUUID());
-        House house = new House();
-        house.setHouseNumber(Integer.parseInt(houseNumField.getText()));
-        house.setRoadName(roadField.getText());
-//        Community newCommunity = new Community(areaField.getText(), districtField.getText());
-//        patient.setCommunity(newCommunity);
-//        City newCity = new City(cityField.getText(), pincodeField.getText());
-//        patient.setCity(newCity);
-        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
-        //navigate to screen-2C with "patient object" created here
+//        create patient
+//        validate details
+//        return patient uuid
+//pass doc, pat, hosp objs to VS screen
+//also pass bottomPanel, rootObj to VS
 
+        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
         NewVitalSigns newVitalSignsScreen = new NewVitalSigns(bottomPanel);
         bottomPanel.add("NewVitalSignsScreen", newVitalSignsScreen);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
@@ -230,11 +235,22 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
+        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, rootDataObj);
         bottomPanel.add("patientScreen", patientRegister);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void communityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_communityDropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_communityDropdownActionPerformed
+
+    private void cityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityDropdownActionPerformed
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+        communityDropdown.removeAllItems();
+        populateCommunityDropdown(selectedCity);
+
+    }//GEN-LAST:event_cityDropdownActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,4 +272,29 @@ public class NewPatient extends javax.swing.JPanel {
     private javax.swing.JLabel roadLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void optionPopulate() {
+        ArrayList<City> cityListOptions = rootDataObj.getRootCityDirectory();
+        for (City cityOption : cityListOptions) {
+            cityDropdown.addItem(cityOption.toString());
+        }
+
+    }
+
+    private void populateCommunityDropdown(City selectedCity) {
+        communityDropdown.setEnabled(true);
+        switch (selectedCity.toString()) {
+            case "Toronto":
+                communityDropdown.addItem(rootDataObj.createCommunityFn("Sherbourne St", "GTA").toString());
+                communityDropdown.addItem(rootDataObj.createCommunityFn("AAA St", "Downtown").toString());
+                break;
+            case "Montreal":
+                communityDropdown.addItem(rootDataObj.createCommunityFn("XYZ St", "GMA").toString());
+                communityDropdown.addItem(rootDataObj.createCommunityFn("BBB St", "Uptown").toString());
+                break;
+            default:
+                break;
+
+        }
+    }
 }

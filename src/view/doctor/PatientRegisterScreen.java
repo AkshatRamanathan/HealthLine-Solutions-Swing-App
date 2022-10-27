@@ -6,6 +6,7 @@ package view.doctor;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.MainSystem;
 
 /**
  *
@@ -17,10 +18,12 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
      * @param bottomPanel the value of bottomPanel
      */
     JPanel bottomPanel;
+    MainSystem rootDataObj;
 
-    public PatientRegisterScreen(JPanel bottomPanel) {
+    public PatientRegisterScreen(JPanel bottomPanel, MainSystem rootDataObj) {
         initComponents();
         this.bottomPanel = bottomPanel;
+        this.rootDataObj = rootDataObj;
     }
 
     /**
@@ -97,7 +100,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        doctorScreen doctorScreen = new doctorScreen(bottomPanel);
+        doctorScreen doctorScreen = new doctorScreen(bottomPanel, rootDataObj);
         bottomPanel.add("DoctorScreen", doctorScreen);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -105,7 +108,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void existingPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingPatientButtonActionPerformed
         // TODO add your handling code here:
-        ExistingPatientScreen existingPatientSelection = new ExistingPatientScreen(bottomPanel);
+        ExistingPatientScreen existingPatientSelection = new ExistingPatientScreen(bottomPanel,rootDataObj);
         bottomPanel.add("ExistingPatientScreen", existingPatientSelection);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -113,7 +116,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here:
-        NewPatient newPatientScreen = new NewPatient(bottomPanel);
+        NewPatient newPatientScreen = new NewPatient(bottomPanel, rootDataObj);
         bottomPanel.add("NewPatientScreen", newPatientScreen);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);

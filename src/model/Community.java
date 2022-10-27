@@ -21,6 +21,11 @@ public class Community {
     public Community() {
     }
 
+    @Override
+    public String toString() {
+        return areaName;
+    }
+
     public String getAreaName() {
         return areaName;
     }

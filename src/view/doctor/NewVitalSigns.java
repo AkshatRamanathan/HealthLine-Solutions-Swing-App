@@ -6,7 +6,6 @@ package view.doctor;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Person;
 import model.VitalSigns;
 
 /**
@@ -164,6 +163,5 @@ public class NewVitalSigns extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private NewVitalSigns() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -8,7 +8,7 @@ package model;
  *
  * @author akshb
  */
-class Doctor extends Person {
+public class Doctor extends Person {
 
     private Hospital hospitalName;
 
