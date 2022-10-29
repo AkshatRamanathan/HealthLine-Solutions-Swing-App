@@ -11,6 +11,15 @@ package model;
 public class Admin extends Person {
 
     private String type;
+//    private int adminID;
+
+//    public int getAdminID() {
+//        return adminID;
+//    }
+//
+//    public void setAdminID(int adminID) {
+//        this.adminID = adminID;
+//    }
 
     public String getType() {
         return type;

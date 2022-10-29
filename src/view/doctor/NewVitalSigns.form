@@ -20,10 +20,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="phoneNumber" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailID" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="name" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="personID" min="-2" max="-2" attributes="0"/>
+                  <Component id="pulse" min="-2" max="-2" attributes="0"/>
+                  <Component id="bloodPressure" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="temperature" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="date" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -51,22 +51,22 @@
               <Component id="jLabel1" min="-2" pref="67" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="name" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="temperature" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="TempText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BPText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bloodPressure" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="phoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pulse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="PulseText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="personID" min="-2" max="-2" attributes="0"/>
+                  <Component id="date" min="-2" max="-2" attributes="0"/>
                   <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -93,22 +93,22 @@
         <Property name="text" type="java.lang.String" value="Enter New Vital Signs"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="name">
+    <Component class="javax.swing.JLabel" name="temperature">
       <Properties>
         <Property name="text" type="java.lang.String" value="Temperature:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="emailID">
+    <Component class="javax.swing.JLabel" name="bloodPressure">
       <Properties>
         <Property name="text" type="java.lang.String" value="Blood Pressure:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="phoneNumber">
+    <Component class="javax.swing.JLabel" name="pulse">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pulse:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="personID">
+    <Component class="javax.swing.JLabel" name="date">
       <Properties>
         <Property name="text" type="java.lang.String" value="Date:"/>
       </Properties>
