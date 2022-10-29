@@ -10,4 +10,9 @@ package model;
  */
 public class Patient extends Person {
 
+    @Override
+    public String toString() {
+        return this.getPersonId().toString();
+    }
+
 }

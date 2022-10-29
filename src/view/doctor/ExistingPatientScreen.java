@@ -7,12 +7,16 @@ package view.doctor;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Doctor;
 import model.Encounter;
 import model.EncounterDirectory;
 import model.Hospital;
 import model.MainSystem;
+import model.Patient;
+import model.PatientDirectory;
 
 /**
  *
@@ -49,7 +53,6 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         patientTable = new javax.swing.JTable();
         patientSearchField = new javax.swing.JTextField();
-        patientSearchButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         selectPatientButton = new javax.swing.JButton();
 
@@ -92,11 +95,9 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
                 patientSearchFieldActionPerformed(evt);
             }
         });
-
-        patientSearchButton.setText("GO");
-        patientSearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientSearchButtonActionPerformed(evt);
+        patientSearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                patientSearchFieldKeyTyped(evt);
             }
         });
 
@@ -128,9 +129,7 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
                         .addComponent(backButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(patientSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(patientSearchButton)
-                        .addGap(192, 192, 192))))
+                        .addGap(270, 270, 270))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(selectPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,9 +140,8 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(patientSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(patientSearchField)
-                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -156,14 +154,9 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_patientSearchFieldActionPerformed
 
-    private void patientSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSearchButtonActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_patientSearchButtonActionPerformed
-
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, doctorLogin, null, rootDataObj); //add hospital
+        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, doctorLogin, selectedHospital, rootDataObj); //add hospital
         bottomPanel.add("patientScreen", patientRegister);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -172,21 +165,33 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
 
     private void selectPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectPatientButtonActionPerformed
         // TODO add your handling code here:
-//        int selectedIndex = patientTable.getSelectedRow();
-//        if (selectedIndex < 0) {
-//            JOptionPane.showMessageDialog(this, "Please select a patient", "Error - No selection", JOptionPane.WARNING_MESSAGE);
-//        } else {
-//            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
-//            Employee selectedEmployee = (Employee) model.getValueAt(selectedIndex, 0);
-//            displayDetails(selectedEmployee);
-//        }
+        int selectedIndex = patientTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a patient", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+            Patient selectedPatient = (Patient) model.getValueAt(selectedIndex, 0);
+
+//            System.out.println(selectedPatient);
+            NewVitalSigns newVitalSignsScreen = new NewVitalSigns(bottomPanel, doctorLogin, selectedHospital, selectedPatient);
+            bottomPanel.add("NewVitalSignsScreen", newVitalSignsScreen);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        }
     }//GEN-LAST:event_selectPatientButtonActionPerformed
+
+    private void patientSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patientSearchFieldKeyTyped
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        patientTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(patientSearchField.getText()));
+    }//GEN-LAST:event_patientSearchFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton patientSearchButton;
     private javax.swing.JTextField patientSearchField;
     private javax.swing.JTable patientTable;
     private javax.swing.JButton selectPatientButton;
@@ -196,15 +201,20 @@ public class ExistingPatientScreen extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
         model.setRowCount(0);
         EncounterDirectory currentEncounters = selectedHospital.getEncounters();
+        PatientDirectory tempPatientDirectory = new PatientDirectory();
         for (Encounter enc : currentEncounters.getEncounter()) {
-            Object[] row = new Object[5];
-//            row[1] = enc.getPatient().getPersonId();
-            row[1] = enc.getPatient();
-            row[1] = enc.getPatient().getName();
-            row[2] = enc.getPatient().getEmailId();
-            row[3] = Long.toString(enc.getPatient().getPhoneNumber());
-            row[4] = enc.getDoctor().getName();
+            if (enc.getDoctor() == doctorLogin && !tempPatientDirectory.getPatients().contains(enc.getPatient())) {
+                tempPatientDirectory.getPatients().add(enc.getPatient());
+            }
+        }
 
+        for (Patient pat : tempPatientDirectory.getPatients()) {
+            Object[] row = new Object[5];
+            row[0] = pat;
+            row[1] = pat.getName();
+            row[2] = pat.getEmailId();
+            row[3] = Long.toString(pat.getPhoneNumber());
+            row[4] = doctorLogin.getName();
             model.addRow(row);
         }
     }
