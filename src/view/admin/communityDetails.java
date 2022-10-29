@@ -279,7 +279,7 @@ public class communityDetails extends javax.swing.JPanel {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
-                  Community community = new Community();
+//                  Community community = new Community();
                   
         //        Patient patient = new Patient();
         //        patient.setName(nameField.getText());

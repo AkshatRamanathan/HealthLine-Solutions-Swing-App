@@ -368,8 +368,9 @@ public class hospitalDetails extends javax.swing.JPanel {
         // TODO add your handling code here:
           Hospital hospital = new Hospital();
           hospital.setHospitalName(nameField.getText());
-          hospital.setHospitalCity(cityField.getText());
-          hospital.setHospitalCommunity(communityField);
+//          hospital.setHospitalCity(cityField.getText());
+//          hospital.setHospitalCommunity(communityField);
+
 //        Patient patient = new Patient();
 //        patient.setName(nameField.getText());
 //        patient.setEmailId(emailField.getText());
