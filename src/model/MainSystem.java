@@ -16,14 +16,17 @@ public class MainSystem {
     private ArrayList<City> rootCityDirectory;
     private ArrayList<Hospital> rootHospitalDirectory;
     private ArrayList<Community> rootCommunityDirectory;
+    private ArrayList<Admin> rootAdminDirectory;
 
     public MainSystem() {
         this.rootCityDirectory = new ArrayList<>();
         this.rootHospitalDirectory = new ArrayList<>();
         this.rootCommunityDirectory = new ArrayList<>();
+        this.rootAdminDirectory = new ArrayList<>();
         populateCommunities();
         populateCities();
         populateHospitals();
+        populateAdmins();
 
     }
 
@@ -57,6 +60,14 @@ public class MainSystem {
 
     public void setRootHospitalDirectory(ArrayList<Hospital> rootHospitalDirectory) {
         this.rootHospitalDirectory = rootHospitalDirectory;
+    }
+    
+    public ArrayList<Admin> getRootAdminDirectory() {
+        return rootAdminDirectory;
+    }
+
+    public void setRootAdminDirectory(ArrayList<Admin> rootAdminDirectory) {
+        this.rootAdminDirectory = rootAdminDirectory;
     }
 
     public House createHouseFn(int houseNo, String roadName) {
@@ -119,6 +130,19 @@ public class MainSystem {
         newPerson.setHouse(house);
         newPerson.setCity(city);
         return newPerson;
+    }
+    
+    public Admin createAdminFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city, String type){
+        Admin newAdmin = new Admin();
+        newAdmin.setName(name);
+        newAdmin.setEmailId(emailId);
+        newAdmin.setPhoneNumber(phoneNumber);
+        newAdmin.setPersonId(personId);
+        newAdmin.setCommunity(community);
+        newAdmin.setHouse(house);
+        newAdmin.setCity(city);
+        newAdmin.setType(type);
+        return newAdmin;
     }
 
     public Encounter createEncounterFn(Doctor doctorEnc, Patient patientEnc) {
@@ -239,6 +263,20 @@ public class MainSystem {
         this.rootCommunityDirectory.add(comm2);
         this.rootCommunityDirectory.add(comm3);
         this.rootCommunityDirectory.add(comm4);
+    }
+    
+    private void populateAdmins() {
+        Community adminCommunity = createCommunityFn("Sherbourne Admin St","GTA");
+        House adminHouse = createHouseFn(101,"Main s ");
+        City adminCity = createCityFn("Toronto","M4X ZZZ");
+        
+        Admin sysAdmin = createAdminFn("sysPerson","adminsystem@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24aaa"),adminCommunity,adminHouse,adminCity, "System Admin");
+        Admin hospAdmin = createAdminFn("hosPerson","adminhospital@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24bbb"),adminCommunity,adminHouse,adminCity, "Hospital Admin");
+        Admin commAdmin = createAdminFn("commPerson","admincommunity@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24ccc"),adminCommunity,adminHouse,adminCity, "Community Admin");
+        
+        this.rootAdminDirectory.add(sysAdmin);
+        this.rootAdminDirectory.add(hospAdmin);
+        this.rootAdminDirectory.add(commAdmin);
     }
 
 }

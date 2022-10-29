@@ -20,11 +20,6 @@ public class Doctor extends Person {
         this.hospitalName = hospitalName;
     }
     
-//    @Override
-//    public String toString() {
-//        return this.getHospitalName().getHospitalName().toString();
-//    }
-    
     @Override
     public String toString() {
         return name;
