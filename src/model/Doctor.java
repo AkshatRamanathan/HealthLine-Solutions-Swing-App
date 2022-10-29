@@ -19,5 +19,10 @@ public class Doctor extends Person {
     public void setHospitalName(Hospital hospitalName) {
         this.hospitalName = hospitalName;
     }
+    
+    @Override
+    public String toString() {
+        return this.getHospitalName().getHospitalName().toString();
+    }
 
 }

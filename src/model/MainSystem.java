@@ -93,15 +93,10 @@ public class MainSystem {
             newCommDirectory.add(rootCommunityDirectory.get(2));
             newCommDirectory.add(rootCommunityDirectory.get(3));
         }
-
-//        Community newCityCommunity1 = createCommunityFn(comArea1, comDistrict1);
-//        Community newCityCommunity2 = createCommunityFn("A2", "D2");
-//        newCommDirectory.add(newCityCommunity1);
-//        newCommDirectory.add(newCityCommunity2);
         return newCity;
     }
 
-    public Doctor createDoctorFn(String name, String emailId, long phoneNumber, UUID personId, Community community, House house, City city) {
+    public Doctor createDoctorFn(String name, String emailId, long phoneNumber, UUID personId, Community community, House house, City city, Hospital hospitalName) {
         Doctor newPerson = new Doctor();
         newPerson.setName(name);
         newPerson.setEmailId(emailId);
@@ -110,6 +105,7 @@ public class MainSystem {
         newPerson.setCommunity(community);
         newPerson.setHouse(house);
         newPerson.setCity(city);
+        newPerson.setHospitalName(hospitalName);
         return newPerson;
     }
 
@@ -134,7 +130,6 @@ public class MainSystem {
     }
 
     private void populateCities() {
-        // create 2 cities and add to rootHosp array with cityName, pincode, communityDir
         City newCity1 = createCityFn("Toronto", "M4X 1W5", "Power St", "Brampton");
         City newCity2 = createCityFn("Montreal", "R4X 1W5", "A1", "D1");
         this.rootCityDirectory.add(newCity1);
@@ -142,17 +137,13 @@ public class MainSystem {
     }
 
     private void populateHospitals() {
-        // create 2 hospitals and add to rootHosp array with doctor dir (2), encDir, community, city
-//        HOSPITAL 1
+//      HOSPITAL 1
         Hospital newHospital = new Hospital();
         newHospital.setHospitalName("Alpha Hospital");
-        // city
-//        City hospitalCity = createCityFn("Toronto", "M4X 1W5");
         City hospitalCity = rootCityDirectory.get(0);
         newHospital.setHospitalCity(hospitalCity);
 
         // community
-//        Community newCommunity = createCommunityFn("Sherbourne St", "GTA");
         Community newCommunity = rootCommunityDirectory.get(0);
         newHospital.setHospitalCommunity(newCommunity);
 
@@ -160,21 +151,19 @@ public class MainSystem {
         DoctorDirectory newDoctorDirectory = new DoctorDirectory();
         newHospital.setDoctors(newDoctorDirectory);
 
-//        Community doc1Community = createCommunityFn("Sherbourne St", "GTA");
         Community doc1Community = rootCommunityDirectory.get(0);
-        // House doc1House = createHouseFn(101,"Main s ");
-//        City doc1City = createCityFn("Toronto", "M4X ZZZ");
+        House doc1House = createHouseFn(101,"Main s ");
         City doc1City = rootCityDirectory.get(0);
+        
 
-        Doctor doctorObj1 = createDoctorFn("Dr Paul", "paul.dr@gmail.com", 1234567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"), doc1Community, null, doc1City);
+        Doctor doctorObj1 = createDoctorFn("Dr Paul", "paul.dr@gmail.com", 1234567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"), doc1Community, doc1House, doc1City, newHospital);
 
-//        Community doc2Community = createCommunityFn("AAA St", "Downtown");
+
         Community doc2Community = rootCommunityDirectory.get(1);
-        // House doc2House = createHouseFn(301,"DDD");
-//        City doc2City = createCityFn("Montreal", "WW4XZ");
+        House doc2House = createHouseFn(301,"DDD");
         City doc2City = rootCityDirectory.get(1);
 
-        Doctor doctorObj2 = createDoctorFn("Dr Henry", "henry.dr@gmail.com", 452167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4d"), doc2Community, null, doc2City);
+        Doctor doctorObj2 = createDoctorFn("Dr Henry", "henry.dr@gmail.com", 452167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4d"), doc2Community, doc2House, doc2City, newHospital);
 
         newDoctorDirectory.addDoctor(doctorObj1);
         newDoctorDirectory.addDoctor(doctorObj2);
@@ -183,12 +172,10 @@ public class MainSystem {
         Hospital newHospital2 = new Hospital();
         newHospital2.setHospitalName("Global Hospital");
         // city
-//        City hospitalCity2 = createCityFn("Montreal", "R4X 1W5");
         City hospitalCity2 = rootCityDirectory.get(1);
         newHospital2.setHospitalCity(hospitalCity2);
 
         // community
-//        Community newCommunity2 = createCommunityFn("XYZ St", "GMA");
         Community newCommunity2 = rootCommunityDirectory.get(2);
         newHospital2.setHospitalCommunity(newCommunity2);
 
@@ -198,19 +185,17 @@ public class MainSystem {
 
 //        Community doc3Community = createCommunityFn("XYZ St", "GMA");
         Community doc3Community = rootCommunityDirectory.get(2);
-        // House doc1House = createHouseFn(101,"Main s ");
-//        City doc3City = createCityFn("Montreal", "M4X ZZZ");
+        House doc1House2 = createHouseFn(101,"Main s ");
         City doc3City = rootCityDirectory.get(1);
 
-        Doctor doctorObj3 = createDoctorFn("Dr Vidhya", "vidhya.dr@gmail.com", 554567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5c"), doc3Community, null, doc3City);
+        Doctor doctorObj3 = createDoctorFn("Dr Vidhya", "vidhya.dr@gmail.com", 554567890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5c"), doc3Community, doc1House2, doc3City, newHospital2);
 
 //        Community doc4Community = createCommunityFn("BBB St", "Uptown");
         Community doc4Community = rootCommunityDirectory.get(3);
-        // House doc2House = createHouseFn(301,"DDD");
-//        City doc4City = createCityFn("Montreal", "WW4 DXZ");
+         House doc2House2 = createHouseFn(301,"DDD");
         City doc4City = rootCityDirectory.get(1);
 
-        Doctor doctorObj4 = createDoctorFn("Dr Nandhini", "nandhini.dr@gmail.com", 772167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5d"), doc4Community, null, doc4City);
+        Doctor doctorObj4 = createDoctorFn("Dr Nandhini", "nandhini.dr@gmail.com", 772167890, UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f5d"), doc4Community, doc2House2, doc4City, newHospital2);
 
         newDoctorDirectory2.addDoctor(doctorObj3);
         newDoctorDirectory2.addDoctor(doctorObj4);
