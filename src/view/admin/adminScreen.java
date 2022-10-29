@@ -4,6 +4,7 @@
  */
 package view.admin;
 
+import java.awt.CardLayout;
 import java.util.UUID;
 import javax.swing.JPanel;
 import model.Admin;
@@ -17,7 +18,7 @@ public class adminScreen extends javax.swing.JPanel {
     /**
      * Creates new form doctorScreen
      */
-    private JPanel bottomPanel;
+    JPanel bottomPanel;
 
     public adminScreen(JPanel bottomPanel) {
         initComponents();
@@ -127,13 +128,17 @@ public class adminScreen extends javax.swing.JPanel {
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
+        selectoptionScreen patient = new selectoptionScreen(bottomPanel);
+        bottomPanel.add("patientScreen", patient);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
 
         Admin admin = new Admin();
         admin.setType((String) adminTypeDrpdwn.getSelectedItem());
         admin.setPersonId(UUID.fromString((adminIDText.getText())));
 
 //        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
-//        bottomPanel.add("patientScreen", patientRegister);
+//        bottomPanel.add("selectoptionScreen", patientRegister);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
     }//GEN-LAST:event_LoginBtnActionPerformed
