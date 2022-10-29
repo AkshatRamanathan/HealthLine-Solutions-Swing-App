@@ -4,13 +4,18 @@
  */
 package view.patient;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.City;
+import model.Community;
+import model.Hospital;
 import model.MainSystem;
+import model.Doctor;
+import model.DoctorDirectory;
 
 /**
  *
@@ -24,12 +29,23 @@ public class PatientPanel extends javax.swing.JPanel {
     String selectedCity = "";
     String selectedCommunity = "";
     MainSystem rootDataObj;
+    ArrayList<Doctor> docList;
     private JPanel bottomPanel;
     public PatientPanel(JPanel bottomPanel, MainSystem rootDataObj) {
+        this.docList = new ArrayList<>();
         initComponents();
         this.bottomPanel = bottomPanel;
         this.rootDataObj = rootDataObj;
-        populateDoctorTableData();
+        populateCityValues();
+        
+        txtName.setEditable(false);
+        txtEmail.setEditable(false);
+        txtHospitalName.setEditable(false);
+        txtHouse.setEditable(false);
+        txtAreaName.setEditable(false);
+        txtDistrict.setEditable(false);
+        txtCity.setEditable(false);
+        txtPincode.setEditable(false);
     }
 
     /**
@@ -63,11 +79,12 @@ public class PatientPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
         cityDropdown = new javax.swing.JComboBox<>();
-        committeDropdown = new javax.swing.JComboBox<>();
+        communityDropdown = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        applyButton = new javax.swing.JButton();
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -232,6 +249,11 @@ public class PatientPanel extends javax.swing.JPanel {
                 cityDropdownActionPerformed(evt);
             }
         });
+        cityDropdown.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cityDropdownKeyPressed(evt);
+            }
+        });
 
         doctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,12 +265,27 @@ public class PatientPanel extends javax.swing.JPanel {
             new String [] {
                 "Name", "Email", "Phone No", "Hospital Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(doctorTable);
 
         jLabel5.setText("City");
 
         jLabel6.setText("Community");
+
+        applyButton.setText("Apply");
+        applyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -271,10 +308,14 @@ public class PatientPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel5))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(committeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel6)
+                                    .addGap(256, 256, 256))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(communityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(applyButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 0, 0)
                                     .addComponent(btnSearch))))))
@@ -294,7 +335,8 @@ public class PatientPanel extends javax.swing.JPanel {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(cityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(committeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(communityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(applyButton))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,14 +366,18 @@ public class PatientPanel extends javax.swing.JPanel {
         int selectedRowIndex = doctorTable.getSelectedRow();
         if(selectedRowIndex < 0 ){
             JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
         }
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
-//            Person selectedPerson = (Person) model.getValueAt(selectedRowIndex, 0);
-//            txtDrName.setText(String.valueOf(selectedPerson.getName()));
-//            txtDrAddress.setText(String.valueOf(selectedPerson.getAddress()));
-//            txtDrCity.setText(String.valueOf(selectedPerson.getCommunity()));
-//            txtDrEmail.setText(String.valueOf(selectedPerson.getCommunity()));
-
+            Doctor selectedDoc = (Doctor) model.getValueAt(selectedRowIndex, 0);
+            txtName.setText(String.valueOf(selectedDoc.getName()));
+            txtEmail.setText(String.valueOf(selectedDoc.getEmailId()));
+            txtHospitalName.setText(String.valueOf(selectedDoc.getHospitalName()));
+            txtHouse.setText(String.valueOf(selectedDoc.getHouse().getRoadName()));
+            txtAreaName.setText(String.valueOf(selectedDoc.getCommunity().getAreaName()));
+            txtDistrict.setText(String.valueOf(selectedDoc.getCommunity().getDistrict()));
+            txtCity.setText(String.valueOf(selectedDoc.getCity().getCityName()));
+            txtPincode.setText(String.valueOf(selectedDoc.getCity().getPinCode()));
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
@@ -364,18 +410,44 @@ public class PatientPanel extends javax.swing.JPanel {
 
     private void cityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityDropdownActionPerformed
         // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+        communityDropdown.removeAllItems();
+        for(Community comObj: selectedCity.getCommunityDirectory()){
+            communityDropdown.addItem(comObj.getDistrict());
+        }
+        communityDropdown.setSelectedItem(null);
     }//GEN-LAST:event_cityDropdownActionPerformed
 
     private void txtCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCityActionPerformed
 
+    private void cityDropdownKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cityDropdownKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cityDropdownKeyPressed
+
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+        // TODO add your handling code here:
+        docList.clear();
+        txtName.setText(null);
+        txtEmail.setText(null);
+        txtHospitalName.setText(null);
+        txtHouse.setText(null);
+        txtAreaName.setText(null);
+        txtDistrict.setText(null);
+        txtCity.setText(null);
+        txtPincode.setText(null);
+        populateDoctorTableData();
+        txtSearch.setText("");
+    }//GEN-LAST:event_applyButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton applyButton;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
     private javax.swing.JComboBox<String> cityDropdown;
-    private javax.swing.JComboBox<String> committeDropdown;
+    private javax.swing.JComboBox<String> communityDropdown;
     private javax.swing.JTable doctorTable;
     private javax.swing.JPanel doctorViewPanel;
     private javax.swing.JLabel jLabel1;
@@ -401,26 +473,34 @@ public class PatientPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
-    
-    private void populateDoctorTableData() {
+    private void populateCityValues() {
         for(City cityObj: this.rootDataObj.getRootCityDirectory()){
             cityDropdown.addItem(cityObj.getCityName());
-            System.out.println(cityObj.getCommunityDirectory());
         }
+//      cityDropdown.setSelectedItem(null);
+    }
+    
+    private void populateDoctorTableData() {
         DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
         model.setRowCount(0);
         
-        for(City cityObj: this.rootDataObj.getRootCityDirectory()){
-            
+        for(Hospital hospitalObj: this.rootDataObj.getRootHospitalDirectory()){
+            if(hospitalObj.getHospitalCommunity().getDistrict() == communityDropdown.getSelectedItem() && 
+                    hospitalObj.getHospitalCity().getCityName()== cityDropdown.getSelectedItem()){            
+                DoctorDirectory docDir = hospitalObj.getDoctors();
+                for(Doctor doc: docDir.getDoctors()) {
+                    docList.add(doc);
+                }
+            }
         }
-//        for (Person person: newList.getPersons()){
-//            Object[] row = new Object[5];
-//            row[0] = person.getName();
-//            row[1] = person.getAddress();
-//            row[2] = person.getCommunity();
-//            row[4] = person.getEmailId();
-//            model.addRow(row);
-//        }
+        for (Doctor docObj: docList){
+            Object[] row = new Object[4];
+            row[0] = docObj;
+            row[1] = docObj.getEmailId();
+            row[2] = docObj.getPhoneNumber();
+            row[3] = docObj.getHospitalName();
+            model.addRow(row);
+        }
     }   
     
     private void filterDoctorTable(String name) {

@@ -8,16 +8,20 @@ package model;
  *
  * @author akshb
  */
-class Doctor extends Person {
+public class Doctor extends Person {
 
-    private Hospital hospitalName;
+    private String hospitalName;
 
-    public Hospital getHospitalName() {
+    public String getHospitalName() {
         return hospitalName;
     }
 
-    public void setHospitalName(Hospital hospitalName) {
+    public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
+    }
+    
+    public Doctor() {
+        
     }
 
 }
