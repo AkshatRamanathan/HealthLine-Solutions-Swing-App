@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class Person {
 
-    private String name;
+    public String name;
     private String emailId;
     private long phoneNumber;
     private UUID personId;
