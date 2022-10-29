@@ -15,13 +15,15 @@ public class MainSystem {
 
     private ArrayList<City> rootCityDirectory;
     private ArrayList<Hospital> rootHospitalDirectory;
+    private ArrayList<Admin> rootAdminDirectory;
 
     public MainSystem() {
         this.rootCityDirectory = new ArrayList<>();
         this.rootHospitalDirectory = new ArrayList<>();
+        this.rootAdminDirectory = new ArrayList<>();
         populateCities();
         populateHospitals();
-
+        populateAdmins();
     }
 
     public void addRootCity(City city) {
@@ -107,7 +109,7 @@ public class MainSystem {
         return newPerson;
     }
     
-     public Patient createPatientFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city){
+    public Patient createPatientFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city){
         Patient newPerson = new Patient();
         newPerson.setName(name);
         newPerson.setEmailId(emailId);
@@ -117,6 +119,19 @@ public class MainSystem {
         newPerson.setHouse(house);
         newPerson.setCity(city);
         return newPerson;
+    }
+     
+    public Admin createAdminFn(String name,String emailId,long phoneNumber,UUID personId,Community community,House house,City city, String type){
+        Admin newAdmin = new Admin();
+        newAdmin.setName(name);
+        newAdmin.setEmailId(emailId);
+        newAdmin.setPhoneNumber(phoneNumber);
+        newAdmin.setPersonId(personId);
+        newAdmin.setCommunity(community);
+        newAdmin.setHouse(house);
+        newAdmin.setCity(city);
+        newAdmin.setType(type);
+        return newAdmin;
     }
     
     public Encounter createEncounterFn(Doctor doctorEnc,Patient patientEnc){
@@ -137,7 +152,7 @@ public class MainSystem {
     
     private void populateHospitals() {
         // create 2 hospitals and add to rootHosp array with doctor dir (2), encDir, community, city
-//        HOSPITAL 1
+        // HOSPITAL 1
         Hospital newHospital = new Hospital();
         newHospital.setHospitalName("Alpha Hospital");
         // city
@@ -168,7 +183,7 @@ public class MainSystem {
         
         this.rootHospitalDirectory.add(newHospital);
         
-//        HOSPITAL 2
+        // HOSPITAL 2
         Hospital newHospital2 = new Hospital();
         newHospital2.setHospitalName("Global Hospital");
         // city
@@ -226,4 +241,13 @@ public class MainSystem {
         
     }
 
+    private void populateAdmins() {
+        Community sysCommunity = createCommunityFn("Sherbourne St","GTA");
+        House sysHouse = createHouseFn(101,"Main s ");
+        City sysCity = createCityFn("Toronto","M4X ZZZ");
+        
+        Admin sysAdmin = createAdminFn("Admin System","adminsystemn@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"),sysCommunity,sysHouse,sysCity, "System");
+//        Admin sysAdmin = createAdminFn("Admin System","adminsystemn@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"),sysCommunity,sysHouse,sysCity, "System");
+//        Admin sysAdmin = createAdminFn("Admin System","adminsystemn@gmail.com",987654321,UUID.fromString("5fc03087-d265-11e7-b8c6-83e29cd24f4c"),sysCommunity,sysHouse,sysCity, "System");
+    }
 }
