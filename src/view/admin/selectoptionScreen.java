@@ -13,6 +13,7 @@ import model.Admin;
 import model.City;
 import model.Community;
 import model.House;
+import model.MainSystem;
 import model.Patient;
 import view.admin.patientDetails;
 import view.admin.hospitalDetails;
@@ -28,9 +29,11 @@ public class selectoptionScreen extends javax.swing.JPanel {
      */
     Admin admin;
     JPanel bottomPanel;
+    MainSystem rootDataObj;
 
-    public selectoptionScreen(JPanel bottomPanel, Admin selectedAdmin) {
-        admin = new Admin();
+    public selectoptionScreen(JPanel bottomPanel, MainSystem rootDataObj, Admin selectedAdmin) {
+        admin = selectedAdmin;
+        this.rootDataObj = rootDataObj;
         initComponents();
     }
     
@@ -172,7 +175,7 @@ public class selectoptionScreen extends javax.swing.JPanel {
 //        bottomPanel.add("DoctorScreen", DoctorScreen);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
-        doctorDetails DoctorDetails = new doctorDetails(admin);
+        doctorDetails DoctorDetails = new doctorDetails(admin,this.rootDataObj);
             jSplitPane1.setRightComponent(DoctorDetails);
     }//GEN-LAST:event_DoctorBtnActionPerformed
 
@@ -191,21 +194,21 @@ public class selectoptionScreen extends javax.swing.JPanel {
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
 
-        patientDetails PatientDetails = new patientDetails(admin);
+        patientDetails PatientDetails = new patientDetails(admin, this.rootDataObj);
             jSplitPane1.setRightComponent(PatientDetails);
         
     }//GEN-LAST:event_PatientBtnActionPerformed
 
     private void HospitalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalBtnActionPerformed
         // TODO add your handling code here:
-        hospitalDetails HospitalDetails = new hospitalDetails(admin);
+        hospitalDetails HospitalDetails = new hospitalDetails(admin, this.rootDataObj);
             jSplitPane1.setRightComponent(HospitalDetails);
             
     }//GEN-LAST:event_HospitalBtnActionPerformed
 
     private void CommunityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityBtnActionPerformed
         // TODO add your handling code here:
-        communityDetails CommunityDetails = new communityDetails(admin);
+        communityDetails CommunityDetails = new communityDetails(admin,this.rootDataObj);
             jSplitPane1.setRightComponent(CommunityDetails);
     }//GEN-LAST:event_CommunityBtnActionPerformed
 

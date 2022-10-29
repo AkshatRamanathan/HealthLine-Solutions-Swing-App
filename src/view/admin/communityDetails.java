@@ -6,6 +6,7 @@ package view.admin;
 
 import model.Admin;
 import model.Community;
+import model.MainSystem;
 
 /**
  *
@@ -17,7 +18,7 @@ public class communityDetails extends javax.swing.JPanel {
      * Creates new form communityDetails
      */
    Admin admin;
-    public communityDetails(Admin admin) {
+    public communityDetails(Admin admin, MainSystem rootDataObj) {
         this.admin = admin;
         initComponents();
     }

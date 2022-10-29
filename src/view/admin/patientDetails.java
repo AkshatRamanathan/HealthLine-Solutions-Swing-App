@@ -12,6 +12,7 @@ import model.Admin;
 import model.City;
 import model.Community;
 import model.House;
+import model.MainSystem;
 import model.Patient;
 
 /**
@@ -24,7 +25,7 @@ public class patientDetails extends javax.swing.JPanel {
      * Creates new form patientScreens
      */
     Admin admin;
-    public patientDetails(Admin admin) {
+    public patientDetails(Admin admin, MainSystem rootDataObj) {
         this.admin = admin;
         initComponents();
     }

@@ -139,7 +139,7 @@ public class adminScreen extends javax.swing.JPanel {
         }
         
         if(selectedAdmin.getPersonId().toString() == null ? adminIDText.getText() == null : selectedAdmin.getPersonId().toString().equals(adminIDText.getText())) {
-            selectoptionScreen patient = new selectoptionScreen(bottomPanel,selectedAdmin );
+            selectoptionScreen patient = new selectoptionScreen(bottomPanel,this.rootDataObj, selectedAdmin );
             bottomPanel.add("patientScreen", patient);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);

@@ -6,6 +6,7 @@ package view.admin;
 
 import model.Admin;
 import model.Hospital;
+import model.MainSystem;
 
 /**
  *
@@ -17,7 +18,7 @@ public class hospitalDetails extends javax.swing.JPanel {
      * Creates new form hospitalDetails
      */
     Admin admin;
-    public hospitalDetails(Admin admin) {
+    public hospitalDetails(Admin admin, MainSystem rootDataObj) {
         this.admin = admin;
         initComponents();
     }
