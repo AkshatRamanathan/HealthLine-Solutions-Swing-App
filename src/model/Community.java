@@ -18,6 +18,9 @@ public class Community {
         this.district = district;
     }
 
+    public Community() {
+    }
+
     public String getAreaName() {
         return areaName;
     }

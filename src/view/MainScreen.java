@@ -8,6 +8,9 @@ import view.doctor.doctorScreen;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 import view.admin.adminScreen;
+import view.patient.PatientPanel;
+import model.MainSystem;
+
 
 /**
  *
@@ -18,9 +21,10 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
+    MainSystem rootDataObj;
     public MainScreen() {
         initComponents();
-
+        this.rootDataObj = new MainSystem();
     }
 
     /**
@@ -139,6 +143,10 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void patientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientButtonActionPerformed
         // TODO add your handling code here:
+        PatientPanel patientPanel = new PatientPanel(bottomPanel,this.rootDataObj);
+        bottomPanel.add("PatientPanel", patientPanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_patientButtonActionPerformed
 
     private void doctorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorButtonActionPerformed

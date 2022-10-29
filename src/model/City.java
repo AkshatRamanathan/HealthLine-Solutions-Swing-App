@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author akshb
@@ -12,6 +14,23 @@ public class City {
 
     private String cityName;
     private String pinCode;
+    private ArrayList<Community> communityDirectory;
+
+    public ArrayList<Community> getCommunityDirectory() {
+        return communityDirectory;
+    }
+
+    public void setCommunityDirectory(ArrayList<Community> communityDirectory) {
+        this.communityDirectory = communityDirectory;
+    }
+
+    public void addCommunity(Community comunity) {
+        this.communityDirectory.add(comunity);
+    }
+
+    public void deleteComunity(Community comunity) {
+        this.communityDirectory.remove(comunity);
+    }
 
     public String getCityName() {
         return cityName;
@@ -32,6 +51,11 @@ public class City {
     public City(String cityName, String pinCode) {
         this.cityName = cityName;
         this.pinCode = pinCode;
+        this.communityDirectory = new ArrayList<>();
+    }
+    
+    public City() {
+        
     }
 
 }

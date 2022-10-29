@@ -13,6 +13,9 @@ import java.util.ArrayList;
 public class EncounterDirectory {
 
     private ArrayList<Encounter> encounter;
+    
+    public EncounterDirectory() {
+    }
 
     public ArrayList<Encounter> getEncounter() {
         return encounter;

@@ -14,6 +14,10 @@ class DoctorDirectory {
 
     private ArrayList<Doctor> doctors;
 
+    public DoctorDirectory() {
+        this.doctors = new ArrayList<>();
+    }
+
     public ArrayList<Doctor> getDoctors() {
         return doctors;
     }
