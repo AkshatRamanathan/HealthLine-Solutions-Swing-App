@@ -410,15 +410,12 @@ public class PatientPanel extends javax.swing.JPanel {
 
     private void cityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityDropdownActionPerformed
         // TODO add your handling code here:
-        for(City cityObj: this.rootDataObj.getRootCityDirectory()){
-            if(cityDropdown.getSelectedItem() == cityObj.getCityName()) {
-                communityDropdown.removeAllItems();
-                for(Community comObj: cityObj.getCommunityDirectory()){
-                    communityDropdown.addItem(comObj.getDistrict());
-                }
-                communityDropdown.setSelectedItem(null);
-            }
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+        communityDropdown.removeAllItems();
+        for(Community comObj: selectedCity.getCommunityDirectory()){
+            communityDropdown.addItem(comObj.getDistrict());
         }
+        communityDropdown.setSelectedItem(null);
     }//GEN-LAST:event_cityDropdownActionPerformed
 
     private void txtCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCityActionPerformed
@@ -441,6 +438,7 @@ public class PatientPanel extends javax.swing.JPanel {
         txtCity.setText(null);
         txtPincode.setText(null);
         populateDoctorTableData();
+        txtSearch.setText("");
     }//GEN-LAST:event_applyButtonActionPerformed
 
 
