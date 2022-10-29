@@ -23,7 +23,8 @@ public class Community {
 
     @Override
     public String toString() {
-        return areaName;
+//        return areaName;
+        return district;
     }
 
     public String getAreaName() {

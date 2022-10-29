@@ -6,6 +6,10 @@ package view.doctor;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Doctor;
+import model.Encounter;
+import model.Hospital;
+import model.Patient;
 import model.VitalSigns;
 
 /**
@@ -18,9 +22,15 @@ public class NewVitalSigns extends javax.swing.JPanel {
      * Creates new form NewVitalSigns
      */
     JPanel bottomPanel;
+    Hospital selectedHospital;
+    Doctor doctorLogin;
+    Patient newPatient;
 
-    public NewVitalSigns(JPanel bottomPanel) {
+    public NewVitalSigns(JPanel bottomPanel, Doctor doctorLogin, Hospital selectedHospital, Patient newPatient) {
         this.bottomPanel = bottomPanel;
+        this.selectedHospital = selectedHospital;
+        this.doctorLogin = doctorLogin;
+        this.newPatient = newPatient;
         initComponents();
     }
 
@@ -130,12 +140,27 @@ public class NewVitalSigns extends javax.swing.JPanel {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
-        VitalSigns userVitals = new VitalSigns();
-        userVitals.setTemperature(Integer.parseInt(TempText.getText()));
-        userVitals.setBloodPressure(Integer.parseInt(BPText.getText()));
-        userVitals.setPulse(Integer.parseInt(PulseText.getText()));
-        userVitals.setDateOfVitalEntry(jDateChooser1.getDate());
-        JOptionPane.showMessageDialog(this, "New Vital Signs Saved as new Encounter!");
+        try {
+            VitalSigns userVitals = new VitalSigns();
+            userVitals.setTemperature(Integer.parseInt(TempText.getText()));
+            userVitals.setBloodPressure(Integer.parseInt(BPText.getText()));
+            userVitals.setPulse(Integer.parseInt(PulseText.getText()));
+            userVitals.setDateOfVitalEntry(jDateChooser1.getDate());
+
+            // new encounter
+            Encounter newEncounter = new Encounter();
+            newEncounter.setDoctor(doctorLogin);
+            newEncounter.setPatient(newPatient);
+            newEncounter.setVitals(userVitals);
+
+            //add encounter into encDir or current hospital
+            selectedHospital.getEncounters().addEncounter(newEncounter);
+            JOptionPane.showMessageDialog(this, "New Vital Signs Saved as new Encounter!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Please enter correct details!");
+
+        }
         //create encounter, add this into encounters of the hospital of the perticular community
 
     }//GEN-LAST:event_SaveBtnActionPerformed

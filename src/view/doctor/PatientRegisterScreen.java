@@ -6,6 +6,8 @@ package view.doctor;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.Doctor;
+import model.Hospital;
 import model.MainSystem;
 
 /**
@@ -19,11 +21,16 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     MainSystem rootDataObj;
+    Doctor doctorLogin;
+    Hospital selectedHospital;
 
-    public PatientRegisterScreen(JPanel bottomPanel, MainSystem rootDataObj) {
+    public PatientRegisterScreen(JPanel bottomPanel, Doctor doctorLogin, Hospital selectedHospital, MainSystem rootDataObj) {
         initComponents();
         this.bottomPanel = bottomPanel;
         this.rootDataObj = rootDataObj;
+        this.doctorLogin = doctorLogin;
+        this.selectedHospital = selectedHospital;
+        titleLabel.setText("Welcome " + doctorLogin.getName());
     }
 
     /**
@@ -39,6 +46,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
         existingPatientButton = new javax.swing.JButton();
         newPatientButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
 
         subTitleLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         subTitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,6 +73,10 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
             }
         });
 
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Welcome Dr. ,");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,27 +86,33 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(backButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(subTitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(existingPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
-                        .addComponent(newPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(subTitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(existingPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98)
+                                .addComponent(newPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(subTitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backButton))
+                    .addComponent(backButton)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(subTitleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(existingPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newPatientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -108,7 +126,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void existingPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_existingPatientButtonActionPerformed
         // TODO add your handling code here:
-        ExistingPatientScreen existingPatientSelection = new ExistingPatientScreen(bottomPanel,rootDataObj);
+        ExistingPatientScreen existingPatientSelection = new ExistingPatientScreen(bottomPanel, doctorLogin, selectedHospital, rootDataObj);
         bottomPanel.add("ExistingPatientScreen", existingPatientSelection);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -116,7 +134,7 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
 
     private void newPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientButtonActionPerformed
         // TODO add your handling code here:
-        NewPatient newPatientScreen = new NewPatient(bottomPanel, rootDataObj);
+        NewPatient newPatientScreen = new NewPatient(bottomPanel, doctorLogin, selectedHospital, rootDataObj);
         bottomPanel.add("NewPatientScreen", newPatientScreen);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -128,5 +146,6 @@ public class PatientRegisterScreen extends javax.swing.JPanel {
     private javax.swing.JButton existingPatientButton;
     private javax.swing.JButton newPatientButton;
     private javax.swing.JLabel subTitleLabel1;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

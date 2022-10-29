@@ -122,13 +122,14 @@ public class doctorScreen extends javax.swing.JPanel {
     private void nextScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextScreenButtonActionPerformed
         // TODO add your handling code here:
         Doctor doctorLogin = doctorExists(doctorIdTextField.getText());
+        Hospital selectedHospital = rootDataObj.getRootHospitalDirectory().get(hospitalDropdown.getSelectedIndex());
+
         if (doctorLogin != null) {
-            PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, rootDataObj);
+            PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, doctorLogin, selectedHospital, rootDataObj);
             bottomPanel.add("patientScreen", patientRegister);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);
-        }
-        else{
+        } else {
             validationLabel.setText("Please enter valid doctor ID or recheck the hospital field");
         }
 

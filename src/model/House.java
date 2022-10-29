@@ -25,7 +25,15 @@ public class House {
         return roadName;
     }
 
+    public House() {
+    }
+
     public void setRoadName(String roadName) {
+        this.roadName = roadName;
+    }
+
+    public House(int houseNumber, String roadName) {
+        this.houseNumber = houseNumber;
         this.roadName = roadName;
     }
 

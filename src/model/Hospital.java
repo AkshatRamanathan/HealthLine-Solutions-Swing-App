@@ -20,6 +20,13 @@ public class Hospital {
         return hospitalName;
     }
 
+    public Hospital() {
+        this.doctors = new DoctorDirectory();
+        this.encounters = new EncounterDirectory();
+        this.hospitalCity = new City();
+        this.hospitalCommunity = new Community();
+    }
+
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
     }

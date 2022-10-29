@@ -5,11 +5,16 @@
 package view.doctor;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
+import model.Community;
+import model.Doctor;
+import model.Hospital;
 import model.House;
 import model.MainSystem;
 import model.Patient;
@@ -25,14 +30,18 @@ public class NewPatient extends javax.swing.JPanel {
      */
     JPanel bottomPanel;
     MainSystem rootDataObj;
+    Doctor doctorLogin;
+    Hospital selectedHospital;
+    Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
 
-    public NewPatient(JPanel bottomPanel, MainSystem rootDataObj) {
+    public NewPatient(JPanel bottomPanel, Doctor doctorLogin, Hospital selectedHospital, MainSystem rootDataObj) {
         this.bottomPanel = bottomPanel;
-        initComponents();
         this.rootDataObj = rootDataObj;
+        this.doctorLogin = doctorLogin;
+        this.selectedHospital = selectedHospital;
+        initComponents();
         cityDropdown.removeAllItems();
         communityDropdown.setEnabled(false);
-
         optionPopulate();
 
     }
@@ -81,6 +90,18 @@ public class NewPatient extends javax.swing.JPanel {
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameFieldActionPerformed(evt);
+            }
+        });
+
+        emailField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                emailFieldKeyReleased(evt);
+            }
+        });
+
+        phoneField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                phoneFieldKeyReleased(evt);
             }
         });
 
@@ -215,18 +236,28 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
         // TODO add your handling code here:
+        try {
 
-//        create patient
-//        validate details
-//        return patient uuid
-//pass doc, pat, hosp objs to VS screen
-//also pass bottomPanel, rootObj to VS
+            Patient newPatient = new Patient();
+            newPatient.setName(nameField.getText());
+            newPatient.setEmailId(emailField.getText());
+            newPatient.setPhoneNumber(Long.parseLong(phoneField.getText()));
+            UUID newID = UUID.randomUUID();
+            newPatient.setPersonId(newID);
+            newPatient.setCity(rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex()));
+            newPatient.setCommunity(newPatient.getCity().getCommunityDirectory().get(communityDropdown.getSelectedIndex())); //recheck 
+//        logic or redo this list in the MainSystem class in createCOmmunityFn so objects at correct match
+            newPatient.setHouse(new House(Integer.parseInt(houseNumField.getText()), roadField.getText()));
+            JOptionPane.showMessageDialog(this, "New Patient ID is: " + newID.toString() + "\nPlease copy and save this ID for future reference");
+            NewVitalSigns newVitalSignsScreen = new NewVitalSigns(bottomPanel, doctorLogin, selectedHospital, newPatient);
+            bottomPanel.add("NewVitalSignsScreen", newVitalSignsScreen);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Plase enter correct details", "Error - Incorrect input", JOptionPane.WARNING_MESSAGE);
 
-        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
-        NewVitalSigns newVitalSignsScreen = new NewVitalSigns(bottomPanel);
-        bottomPanel.add("NewVitalSignsScreen", newVitalSignsScreen);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        }
+
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void houseNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseNumFieldActionPerformed
@@ -235,7 +266,7 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, rootDataObj);
+        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel, doctorLogin, selectedHospital, rootDataObj);
         bottomPanel.add("patientScreen", patientRegister);
         CardLayout layout = (CardLayout) bottomPanel.getLayout();
         layout.next(bottomPanel);
@@ -251,6 +282,30 @@ public class NewPatient extends javax.swing.JPanel {
         populateCommunityDropdown(selectedCity);
 
     }//GEN-LAST:event_cityDropdownActionPerformed
+
+    private void emailFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailFieldKeyReleased
+        // TODO add your handling code here:
+        if (!EMAIL_REGEX.matcher(emailField.getText()).matches()) {
+            emailLabel.setForeground(Color.RED);
+            emailField.setForeground(Color.RED);
+        } else {
+            emailLabel.setForeground(Color.BLACK);
+            emailField.setForeground(Color.BLACK);
+
+        }
+    }//GEN-LAST:event_emailFieldKeyReleased
+
+    private void phoneFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneFieldKeyReleased
+        // TODO add your handling code here:
+        if (phoneField.getText().length() != 10) {
+            phoneField.setForeground(Color.RED);
+            phoneField.setForeground(Color.RED);
+        } else {
+            phoneField.setForeground(Color.BLACK);
+            phoneField.setForeground(Color.BLACK);
+
+        }
+    }//GEN-LAST:event_phoneFieldKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,18 +338,8 @@ public class NewPatient extends javax.swing.JPanel {
 
     private void populateCommunityDropdown(City selectedCity) {
         communityDropdown.setEnabled(true);
-        switch (selectedCity.toString()) {
-            case "Toronto":
-                communityDropdown.addItem(rootDataObj.createCommunityFn("Sherbourne St", "GTA").toString());
-                communityDropdown.addItem(rootDataObj.createCommunityFn("AAA St", "Downtown").toString());
-                break;
-            case "Montreal":
-                communityDropdown.addItem(rootDataObj.createCommunityFn("XYZ St", "GMA").toString());
-                communityDropdown.addItem(rootDataObj.createCommunityFn("BBB St", "Uptown").toString());
-                break;
-            default:
-                break;
-
+        for (Community comm : selectedCity.getCommunityDirectory()) {
+            communityDropdown.addItem(comm.toString());
         }
     }
 }
