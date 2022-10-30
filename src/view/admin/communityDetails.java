@@ -311,8 +311,15 @@ public class communityDetails extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-//        Community community = new Community();
-        // create the comm, add to given selected city and rootCommDir
+        Community community = new Community();
+        community.setAreaName(newAreaField.getText());
+        community.setDistrict(newDistrictField.getText());
+        City selectedCity = rootDataObj.getRootCityDirectory().get(newCityDropdown.getSelectedIndex());
+        selectedCity.getCommunityDirectory().add(community);
+        rootDataObj.getRootCommunityDirectory().add(community);
+        JOptionPane.showMessageDialog(this, "New Community saved successfully!");
+        populateCommunityTable();
+
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void ViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBtnActionPerformed
