@@ -568,8 +568,9 @@ public class doctorDetails extends javax.swing.JPanel {
             newHouse.setHouseNumber(Integer.parseInt(doctorHouseField.getText()));
             newHouse.setRoadName(doctorRoadField.getText());
             selectedDoctor.setHouse(newHouse);
-            selectedDoctor.setCity(rootDataObj.getRootCityDirectory().get(doctorCityDropdown.getSelectedIndex()));
-            selectedDoctor.setCommunity(selectedDoctor.getCity().getCommunityDirectory().get(doctorCommunityDropdown.getSelectedIndex()));
+            City selectedCity = rootDataObj.getRootCityDirectory().get(doctorCityDropdown.getSelectedIndex());
+            selectedDoctor.setCity(selectedCity);
+            selectedDoctor.setCommunity(selectedCity.getCommunityDirectory().get(doctorCommunityDropdown.getSelectedIndex()));
             selectedDoctor.setHospitalName(rootDataObj.getRootHospitalDirectory().get(hospitalDropdown.getSelectedIndex()));
             JOptionPane.showMessageDialog(this, "Doctor updated successfully!");
             clearFields();
