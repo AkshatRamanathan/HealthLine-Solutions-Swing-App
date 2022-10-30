@@ -5,7 +5,6 @@
 package view.admin;
 
 import java.awt.CardLayout;
-import java.util.UUID;
 import javax.swing.JPanel;
 import model.Admin;
 import model.MainSystem;
@@ -45,6 +44,7 @@ public class adminScreen extends javax.swing.JPanel {
         adminID = new javax.swing.JLabel();
         adminIDText = new javax.swing.JTextField();
         LoginBtn = new javax.swing.JButton();
+        validationLabel = new javax.swing.JLabel();
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -78,6 +78,9 @@ public class adminScreen extends javax.swing.JPanel {
             }
         });
 
+        validationLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        validationLabel.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,17 +90,20 @@ public class adminScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(adminID)
-                            .addComponent(adminType))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(adminTypeDrpdwn, 0, 145, Short.MAX_VALUE)
-                            .addComponent(adminIDText)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(344, 344, 344)
-                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(validationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(adminID)
+                                    .addComponent(adminType))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(adminTypeDrpdwn, 0, 145, Short.MAX_VALUE)
+                                    .addComponent(adminIDText))))))
                 .addContainerGap(305, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,9 +121,11 @@ public class adminScreen extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adminID)
                     .addComponent(adminIDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(validationLabel)
+                .addGap(16, 16, 16)
                 .addComponent(LoginBtn)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -132,36 +140,35 @@ public class adminScreen extends javax.swing.JPanel {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
         Admin selectedAdmin = null;
-        for(Admin adminObj: this.rootDataObj.getRootAdminDirectory()) {
-            if(adminObj.getType() == adminTypeDrpdwn.getSelectedItem()) {
+        for (Admin adminObj : this.rootDataObj.getRootAdminDirectory()) {
+            if (adminObj.getType() == adminTypeDrpdwn.getSelectedItem()) {
                 selectedAdmin = adminObj;
             }
         }
-        
-        if(selectedAdmin.getPersonId().toString() == null ? adminIDText.getText() == null : selectedAdmin.getPersonId().toString().equals(adminIDText.getText())) {
-            selectoptionScreen patient = new selectoptionScreen(bottomPanel,this.rootDataObj, selectedAdmin );
+
+        if (selectedAdmin.getPersonId().toString() == null ? adminIDText.getText() == null : selectedAdmin.getPersonId().toString().equals(adminIDText.getText())) {
+            selectoptionScreen patient = new selectoptionScreen(bottomPanel, this.rootDataObj, selectedAdmin);
             bottomPanel.add("patientScreen", patient);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
             layout.next(bottomPanel);
         } else {
-            System.out.println("error");
+            validationLabel.setText("Please enter valid Admin ID or recheck the Admin type field");
+
         }
-        
 
 //        Admin admin = new Admin();
 //        admin.setType((String) adminTypeDrpdwn.getSelectedItem());
 //        admin.setPersonId(UUID.fromString((adminIDText.getText())));
-
 //        PatientRegisterScreen patientRegister = new PatientRegisterScreen(bottomPanel);
 //        bottomPanel.add("selectoptionScreen", patientRegister);
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
     }//GEN-LAST:event_LoginBtnActionPerformed
     private void loadAdminType() {
-        for(Admin adminObj: this.rootDataObj.getRootAdminDirectory()) {
+        for (Admin adminObj : this.rootDataObj.getRootAdminDirectory()) {
             adminTypeDrpdwn.addItem(adminObj.getType());
         }
-       
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -172,5 +179,6 @@ public class adminScreen extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> adminTypeDrpdwn;
     private javax.swing.JLabel subTitleLabel1;
     private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel validationLabel;
     // End of variables declaration//GEN-END:variables
 }

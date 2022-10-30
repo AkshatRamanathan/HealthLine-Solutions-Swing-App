@@ -4,16 +4,22 @@
  */
 package view.admin;
 
-import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Admin;
 import model.City;
 import model.Community;
+import model.Doctor;
+import model.DoctorDirectory;
+import model.Hospital;
 import model.House;
 import model.MainSystem;
-import model.Patient;
 
 /**
  *
@@ -21,14 +27,20 @@ import model.Patient;
  */
 public class doctorDetails extends javax.swing.JPanel {
 
-    
     /**
      * Creates new form doctorDetails
      */
     Admin admin;
+    MainSystem rootDataObj;
+    Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
+
     public doctorDetails(Admin admin, MainSystem rootDataObj) {
         this.admin = admin;
+        this.rootDataObj = rootDataObj;
         initComponents();
+        populateDropdowns();
+        populateDoctorTable();
+
     }
 
     /**
@@ -42,86 +54,89 @@ public class doctorDetails extends javax.swing.JPanel {
 
         jPanel3 = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
-        nameField2 = new javax.swing.JTextField();
-        emailField2 = new javax.swing.JTextField();
-        emailLabel2 = new javax.swing.JLabel();
-        nameLabel2 = new javax.swing.JLabel();
-        phoneLabel2 = new javax.swing.JLabel();
-        address2 = new javax.swing.JLabel();
-        roadLabel2 = new javax.swing.JLabel();
-        roadField2 = new javax.swing.JTextField();
-        houseNumField2 = new javax.swing.JTextField();
-        phoneField2 = new javax.swing.JTextField();
-        cityField2 = new javax.swing.JTextField();
-        districtField2 = new javax.swing.JTextField();
-        areaField2 = new javax.swing.JTextField();
-        pincodeField2 = new javax.swing.JTextField();
-        pincodeLabel2 = new javax.swing.JLabel();
-        cityLabel2 = new javax.swing.JLabel();
-        districtLabel2 = new javax.swing.JLabel();
-        areaLabel2 = new javax.swing.JLabel();
+        newDoctorNameField = new javax.swing.JTextField();
+        newDoctorEmailField = new javax.swing.JTextField();
+        newDoctorEmailLabel = new javax.swing.JLabel();
+        newDoctorNameLabel = new javax.swing.JLabel();
+        newDoctorPhoneLabel = new javax.swing.JLabel();
+        newDoctorHouseLabel = new javax.swing.JLabel();
+        newDoctorRoadLabel = new javax.swing.JLabel();
+        newDoctorRoadField = new javax.swing.JTextField();
+        newDoctorHouseField = new javax.swing.JTextField();
+        newDoctorPhoneField = new javax.swing.JTextField();
+        newDoctorCommunityLabel = new javax.swing.JLabel();
+        newDoctorCityLabel = new javax.swing.JLabel();
         SaveBtn1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        EditBtn1 = new javax.swing.JButton();
-        ViewBtn1 = new javax.swing.JButton();
-        DeleteBtn1 = new javax.swing.JButton();
+        ViewButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
         search1 = new javax.swing.JLabel();
-        searchField1 = new javax.swing.JTextField();
-        nameLabel3 = new javax.swing.JLabel();
-        emailLabel3 = new javax.swing.JLabel();
-        phoneLabel3 = new javax.swing.JLabel();
-        address3 = new javax.swing.JLabel();
-        roadLabel3 = new javax.swing.JLabel();
-        roadField3 = new javax.swing.JTextField();
-        houseNumField3 = new javax.swing.JTextField();
-        phoneField3 = new javax.swing.JTextField();
-        emailField3 = new javax.swing.JTextField();
-        nameField3 = new javax.swing.JTextField();
-        areaField3 = new javax.swing.JTextField();
-        districtField3 = new javax.swing.JTextField();
-        cityField3 = new javax.swing.JTextField();
-        pincodeField3 = new javax.swing.JTextField();
-        pincodeLabel3 = new javax.swing.JLabel();
-        cityLabel3 = new javax.swing.JLabel();
-        districtLabel3 = new javax.swing.JLabel();
-        areaLabel3 = new javax.swing.JLabel();
-        UpdateBtn1 = new javax.swing.JButton();
+        searchDoctorField = new javax.swing.JTextField();
+        doctorNameLabel = new javax.swing.JLabel();
+        doctorEmailLabel = new javax.swing.JLabel();
+        doctorPhoneLabel = new javax.swing.JLabel();
+        doctorHouseLabel = new javax.swing.JLabel();
+        doctorHouseField = new javax.swing.JTextField();
+        doctorPhoneField = new javax.swing.JTextField();
+        doctorEmailField = new javax.swing.JTextField();
+        doctorNameField = new javax.swing.JTextField();
+        doctorRoadField = new javax.swing.JTextField();
+        doctorCityLabel = new javax.swing.JLabel();
+        doctorCommunityLabel = new javax.swing.JLabel();
+        doctorRoadLabel = new javax.swing.JLabel();
+        UpdateButton = new javax.swing.JButton();
+        newDoctorCommunityDropdown = new javax.swing.JComboBox<>();
+        newDoctorCityDropdown = new javax.swing.JComboBox<>();
+        doctorCommunityDropdown = new javax.swing.JComboBox<>();
+        doctorCityDropdown = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        doctorTable = new javax.swing.JTable();
+        hospitalLabel = new javax.swing.JLabel();
+        hospitalDropdown = new javax.swing.JComboBox<>();
+        newDoctorHospitalLabel = new javax.swing.JLabel();
+        newDoctorHospitalDropdown = new javax.swing.JComboBox<>();
 
         Title1.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         Title1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Title1.setText("Add New Doctor Details Here");
+        Title1.setText("Add New Doctor");
 
-        nameField2.addActionListener(new java.awt.event.ActionListener() {
+        newDoctorNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameField2ActionPerformed(evt);
+                newDoctorNameFieldActionPerformed(evt);
             }
         });
 
-        emailLabel2.setText("Emaill ID:");
-
-        nameLabel2.setText("Name:");
-
-        phoneLabel2.setText("Phone Number:");
-
-        address2.setText("House Number:");
-
-        roadLabel2.setText("Road Name:");
-
-        houseNumField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNumField2ActionPerformed(evt);
+        newDoctorEmailField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                newDoctorEmailFieldKeyTyped(evt);
             }
         });
 
-        pincodeLabel2.setText("PIN Code:");
+        newDoctorEmailLabel.setText("Emaill ID:");
 
-        cityLabel2.setText("City:");
+        newDoctorNameLabel.setText("Name:");
 
-        districtLabel2.setText("District:");
+        newDoctorPhoneLabel.setText("Phone Number:");
 
-        areaLabel2.setText("Area Name:");
+        newDoctorHouseLabel.setText("House Number:");
+
+        newDoctorRoadLabel.setText("Road Name:");
+
+        newDoctorHouseField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newDoctorHouseFieldActionPerformed(evt);
+            }
+        });
+
+        newDoctorPhoneField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                newDoctorPhoneFieldKeyTyped(evt);
+            }
+        });
+
+        newDoctorCommunityLabel.setText("Community");
+
+        newDoctorCityLabel.setText("City:");
 
         SaveBtn1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         SaveBtn1.setText("Save Doctor Information");
@@ -131,383 +146,603 @@ public class doctorDetails extends javax.swing.JPanel {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Email ID", "Phone Number", "Area Name", "CIty", "PIN Code"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("View Doctor Details Here");
+        jLabel2.setText("View Doctor Details");
 
-        EditBtn1.setText("EDIT");
-
-        ViewBtn1.setText("VIEW");
-        ViewBtn1.addActionListener(new java.awt.event.ActionListener() {
+        ViewButton.setText("VIEW");
+        ViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewBtn1ActionPerformed(evt);
+                ViewButtonActionPerformed(evt);
             }
         });
 
-        DeleteBtn1.setText("DELETE");
-        DeleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+        DeleteButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        DeleteButton.setForeground(new java.awt.Color(255, 0, 51));
+        DeleteButton.setText("DELETE");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteBtn1ActionPerformed(evt);
+                DeleteButtonActionPerformed(evt);
             }
         });
 
         search1.setText("Search Doctor Here:");
 
-        nameLabel3.setText("Name:");
-
-        emailLabel3.setText("Emaill ID:");
-
-        phoneLabel3.setText("Phone Number:");
-
-        address3.setText("House Number:");
-
-        roadLabel3.setText("Road Name:");
-
-        houseNumField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNumField3ActionPerformed(evt);
+        searchDoctorField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchDoctorFieldKeyTyped(evt);
             }
         });
 
-        nameField3.addActionListener(new java.awt.event.ActionListener() {
+        doctorNameLabel.setText("Name:");
+
+        doctorEmailLabel.setText("Emaill ID:");
+
+        doctorPhoneLabel.setText("Phone Number:");
+
+        doctorHouseLabel.setText("House Number:");
+
+        doctorHouseField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameField3ActionPerformed(evt);
+                doctorHouseFieldActionPerformed(evt);
             }
         });
 
-        pincodeLabel3.setText("PIN Code:");
-
-        cityLabel3.setText("City:");
-
-        districtLabel3.setText("District:");
-
-        areaLabel3.setText("Area Name:");
-
-        UpdateBtn1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        UpdateBtn1.setText("Update Doctor Information");
-        UpdateBtn1.addActionListener(new java.awt.event.ActionListener() {
+        doctorNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateBtn1ActionPerformed(evt);
+                doctorNameFieldActionPerformed(evt);
             }
         });
+
+        doctorCityLabel.setText("City:");
+
+        doctorCommunityLabel.setText("Community");
+
+        doctorRoadLabel.setText("Road Name");
+
+        UpdateButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        UpdateButton.setForeground(new java.awt.Color(0, 204, 51));
+        UpdateButton.setText("Update Doctor Information");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        newDoctorCityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newDoctorCityDropdownActionPerformed(evt);
+            }
+        });
+
+        doctorCommunityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorCommunityDropdownActionPerformed(evt);
+            }
+        });
+
+        doctorCityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorCityDropdownActionPerformed(evt);
+            }
+        });
+
+        doctorTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Doctor ID", "Name", "Community", "Hospital"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(doctorTable);
+        if (doctorTable.getColumnModel().getColumnCount() > 0) {
+            doctorTable.getColumnModel().getColumn(0).setResizable(false);
+            doctorTable.getColumnModel().getColumn(1).setResizable(false);
+            doctorTable.getColumnModel().getColumn(2).setResizable(false);
+            doctorTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        hospitalLabel.setText("Hospital");
+
+        newDoctorHospitalLabel.setText("Hospital");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Title1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(roadLabel2)
-                                            .addComponent(address2))
-                                        .addGap(27, 27, 27)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(roadField2)
-                                            .addComponent(houseNumField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(phoneLabel2)
-                                            .addComponent(emailLabel2)
-                                            .addComponent(nameLabel2))
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(27, 27, 27)
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(phoneField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                                    .addComponent(emailField2)))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(nameField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(districtLabel2)
-                                    .addComponent(cityLabel2)
-                                    .addComponent(areaLabel2)
-                                    .addComponent(pincodeLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cityField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(districtField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(areaField2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pincodeField2)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(256, 256, 256)
-                                .addComponent(SaveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(Title1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(newDoctorHouseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(newDoctorRoadLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(19, 19, 19)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(newDoctorRoadField)
+                                        .addComponent(newDoctorHouseField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(newDoctorPhoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(newDoctorEmailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(newDoctorNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGap(19, 19, 19)
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(newDoctorPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addComponent(newDoctorEmailField)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(newDoctorNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(newDoctorHospitalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(newDoctorCityLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(newDoctorCommunityLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(newDoctorCommunityDropdown, 0, 201, Short.MAX_VALUE)
+                                                .addComponent(newDoctorCityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                            .addGap(19, 19, 19)
+                                            .addComponent(newDoctorHospitalDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(SaveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(roadLabel3)
-                                            .addComponent(address3))
-                                        .addGap(27, 27, 27)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(roadField3)
-                                            .addComponent(houseNumField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(search1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(searchDoctorField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(phoneLabel3)
-                                            .addComponent(emailLabel3)
-                                            .addComponent(nameLabel3))
+                                            .addComponent(ViewButton)
+                                            .addComponent(DeleteButton))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(73, 73, 73))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(doctorHouseLabel)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(doctorHouseField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(doctorPhoneLabel)
+                                            .addComponent(doctorEmailLabel)
+                                            .addComponent(doctorNameLabel))
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addGap(27, 27, 27)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(phoneField3)
-                                                    .addComponent(emailField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(doctorPhoneField)
+                                                    .addComponent(doctorEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(nameField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(26, 26, 26)
+                                                .addComponent(doctorNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(100, 100, 100)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(doctorRoadLabel)
+                                        .addComponent(hospitalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(doctorCityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(districtLabel3)
-                                            .addComponent(cityLabel3)
-                                            .addComponent(areaLabel3)
-                                            .addComponent(pincodeLabel3))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cityField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(districtField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(areaField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(pincodeField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(UpdateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(search1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 35, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(ViewBtn1)
-                        .addGap(58, 58, 58)
-                        .addComponent(EditBtn1)
-                        .addGap(56, 56, 56)
-                        .addComponent(DeleteBtn1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                                        .addGap(2, 2, 2)
+                                        .addComponent(doctorCommunityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(doctorCityDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(UpdateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(doctorRoadField)
+                                    .addComponent(hospitalDropdown, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(doctorCommunityDropdown, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(112, 112, 112))))))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {DeleteBtn1, EditBtn1, ViewBtn1});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {DeleteButton, ViewButton});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(Title1)
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel2)
-                    .addComponent(nameField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaLabel2)
-                    .addComponent(areaField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel2)
-                    .addComponent(emailField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel2)
-                    .addComponent(districtField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneLabel2)
-                    .addComponent(phoneField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel2)
-                    .addComponent(cityField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(address2)
-                    .addComponent(houseNumField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pincodeLabel2)
-                    .addComponent(pincodeField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roadLabel2)
-                    .addComponent(roadField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(SaveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search1)
-                    .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EditBtn1)
-                    .addComponent(ViewBtn1)
-                    .addComponent(DeleteBtn1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel3)
-                    .addComponent(nameField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaLabel3)
-                    .addComponent(areaField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel3)
-                    .addComponent(emailField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel3)
-                    .addComponent(districtField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneLabel3)
-                    .addComponent(phoneField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel3)
-                    .addComponent(cityField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(address3)
-                    .addComponent(houseNumField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pincodeLabel3)
-                    .addComponent(pincodeField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roadLabel3)
-                    .addComponent(roadField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UpdateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(Title1)
+                    .addComponent(jLabel2))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(search1)
+                            .addComponent(searchDoctorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(doctorNameLabel)
+                                    .addComponent(doctorNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorRoadLabel)
+                                    .addComponent(doctorRoadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(doctorEmailLabel)
+                                    .addComponent(doctorEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorCityLabel)
+                                    .addComponent(doctorCityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(doctorPhoneLabel)
+                                    .addComponent(doctorPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorCommunityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorCommunityLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(hospitalLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(doctorHouseLabel)
+                                                .addComponent(doctorHouseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(13, 13, 13))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                            .addComponent(hospitalDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18))))
+                                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(ViewButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(DeleteButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorNameLabel)
+                            .addComponent(newDoctorNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorEmailLabel)
+                            .addComponent(newDoctorEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorPhoneLabel)
+                            .addComponent(newDoctorPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorHouseLabel)
+                            .addComponent(newDoctorHouseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorRoadLabel)
+                            .addComponent(newDoctorRoadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorCityLabel)
+                            .addComponent(newDoctorCityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorCommunityLabel)
+                            .addComponent(newDoctorCommunityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newDoctorHospitalLabel)
+                            .addComponent(newDoctorHospitalDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SaveBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(158, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameField2ActionPerformed
+    private void newDoctorNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDoctorNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameField2ActionPerformed
+    }//GEN-LAST:event_newDoctorNameFieldActionPerformed
 
-    private void houseNumField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseNumField2ActionPerformed
+    private void newDoctorHouseFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDoctorHouseFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_houseNumField2ActionPerformed
+    }//GEN-LAST:event_newDoctorHouseFieldActionPerformed
 
     private void SaveBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtn1ActionPerformed
         // TODO add your handling code here:
-//        Doctor doctor = new Doctor();
-//        patient.setName(nameField2.getText());
-//        patient.setEmailId(emailField2.getText());
-//        patient.setPhoneNumber(Long.parseLong(phoneField2.getText()));
-//        patient.setPersonId(UUID.randomUUID());
-//        House house = new House();
-//        house.setHouseNumber(Integer.parseInt(houseNumField2.getText()));
-//        house.setRoadName(roadField2.getText());
-//        Community newCommunity = new Community(areaField2.getText(), districtField2.getText());
-//        patient.setCommunity(newCommunity);
-//        City newCity = new City(cityField2.getText(), pincodeField2.getText());
-//        patient.setCity(newCity);
-//        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
+        try {
+
+            Doctor newDoctor = new Doctor();
+            newDoctor.setName(newDoctorNameField.getText());
+            newDoctor.setEmailId(newDoctorEmailField.getText());
+            newDoctor.setPhoneNumber(Long.parseLong(newDoctorPhoneField.getText()));
+            UUID newID = UUID.randomUUID();
+            newDoctor.setPersonId(newID);
+            newDoctor.setCity(rootDataObj.getRootCityDirectory().get(newDoctorCityDropdown.getSelectedIndex()));
+            newDoctor.setCommunity(newDoctor.getCity().getCommunityDirectory().get(newDoctorCommunityDropdown.getSelectedIndex()));
+            newDoctor.setHouse(new House(Integer.parseInt(newDoctorHouseField.getText()), newDoctorRoadField.getText()));
+            newDoctor.setHospitalName(rootDataObj.getRootHospitalDirectory().get(newDoctorHospitalDropdown.getSelectedIndex()));
+            JOptionPane.showMessageDialog(this, "New Doctor saved successfully!");
+            newDoctor.getHospitalName().getDoctors().addDoctor(newDoctor);
+            populateDoctorTable();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Plase enter correct details", "Error - Incorrect input", JOptionPane.WARNING_MESSAGE);
+
+        }
     }//GEN-LAST:event_SaveBtn1ActionPerformed
 
-    private void ViewBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBtn1ActionPerformed
+    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ViewBtn1ActionPerformed
+        int selectedIndex = doctorTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            Doctor selectedDoctor = (Doctor) model.getValueAt(selectedIndex, 1);
+            displayDetails(selectedDoctor);
+        }
+    }//GEN-LAST:event_ViewButtonActionPerformed
 
-    private void DeleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtn1ActionPerformed
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DeleteBtn1ActionPerformed
+        int selectedIndex = doctorTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to be deleted", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            Doctor selectedDoctor = (Doctor) model.getValueAt(selectedIndex, 1);
+            selectedDoctor.getHospitalName().getDoctors().deleteDoctor(selectedDoctor);
+            JOptionPane.showMessageDialog(this, "Doctor is deleted successfully.");
+            populateDoctorTable();
+        }
+        clearFields();
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    private void houseNumField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseNumField3ActionPerformed
+    private void doctorHouseFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorHouseFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_houseNumField3ActionPerformed
+    }//GEN-LAST:event_doctorHouseFieldActionPerformed
 
-    private void nameField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameField3ActionPerformed
+    private void doctorNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameField3ActionPerformed
+    }//GEN-LAST:event_doctorNameFieldActionPerformed
 
-    private void UpdateBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtn1ActionPerformed
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UpdateBtn1ActionPerformed
+        int selectedIndex = doctorTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+            Doctor selectedDoctor = (Doctor) model.getValueAt(selectedIndex, 1);
+            selectedDoctor.setName(doctorNameField.getText());
+            selectedDoctor.setEmailId(doctorEmailField.getText());
+            selectedDoctor.setPhoneNumber(Long.parseLong(doctorPhoneField.getText()));
+            House newHouse = new House();
+            newHouse.setHouseNumber(Integer.parseInt(doctorHouseField.getText()));
+            newHouse.setRoadName(doctorRoadField.getText());
+            selectedDoctor.setHouse(newHouse);
+            selectedDoctor.setCity(rootDataObj.getRootCityDirectory().get(doctorCityDropdown.getSelectedIndex()));
+            selectedDoctor.setCommunity(selectedDoctor.getCity().getCommunityDirectory().get(doctorCommunityDropdown.getSelectedIndex()));
+            selectedDoctor.setHospitalName(rootDataObj.getRootHospitalDirectory().get(hospitalDropdown.getSelectedIndex()));
+            JOptionPane.showMessageDialog(this, "Doctor updated successfully!");
+            clearFields();
+            populateDoctorTable();
+
+        }
+
+    }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void doctorCommunityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorCommunityDropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doctorCommunityDropdownActionPerformed
+
+    private void newDoctorCityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDoctorCityDropdownActionPerformed
+        // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(newDoctorCityDropdown.getSelectedIndex());
+        newDoctorCommunityDropdown.removeAllItems();
+        populateCommunityDropdown(selectedCity);
+    }//GEN-LAST:event_newDoctorCityDropdownActionPerformed
+
+    private void doctorCityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorCityDropdownActionPerformed
+        // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(doctorCityDropdown.getSelectedIndex());
+        doctorCommunityDropdown.removeAllItems();
+        populateCommunityDropdown(selectedCity);
+    }//GEN-LAST:event_doctorCityDropdownActionPerformed
+
+    private void searchDoctorFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchDoctorFieldKeyTyped
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        doctorTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(searchDoctorField.getText()));
+    }//GEN-LAST:event_searchDoctorFieldKeyTyped
+
+    private void newDoctorEmailFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_newDoctorEmailFieldKeyTyped
+        // TODO add your handling code here:
+        if (!EMAIL_REGEX.matcher(newDoctorEmailField.getText()).matches()) {
+            newDoctorEmailLabel.setForeground(Color.RED);
+            newDoctorEmailField.setForeground(Color.RED);
+        } else {
+            newDoctorEmailLabel.setForeground(Color.BLACK);
+            newDoctorEmailField.setForeground(Color.BLACK);
+
+        }
+    }//GEN-LAST:event_newDoctorEmailFieldKeyTyped
+
+    private void newDoctorPhoneFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_newDoctorPhoneFieldKeyTyped
+        // TODO add your handling code here:
+        if (newDoctorPhoneField.getText().length() != 10) {
+            newDoctorPhoneField.setForeground(Color.RED);
+            newDoctorPhoneLabel.setForeground(Color.RED);
+        } else {
+            newDoctorPhoneField.setForeground(Color.BLACK);
+            newDoctorPhoneLabel.setForeground(Color.BLACK);
+
+        }
+    }//GEN-LAST:event_newDoctorPhoneFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton DeleteBtn1;
-    private javax.swing.JButton EditBtn1;
+    private javax.swing.JButton DeleteButton;
     private javax.swing.JButton SaveBtn1;
     private javax.swing.JLabel Title1;
-    private javax.swing.JButton UpdateBtn1;
-    private javax.swing.JButton ViewBtn1;
-    private javax.swing.JLabel address2;
-    private javax.swing.JLabel address3;
-    private javax.swing.JTextField areaField2;
-    private javax.swing.JTextField areaField3;
-    private javax.swing.JLabel areaLabel2;
-    private javax.swing.JLabel areaLabel3;
-    private javax.swing.JTextField cityField2;
-    private javax.swing.JTextField cityField3;
-    private javax.swing.JLabel cityLabel2;
-    private javax.swing.JLabel cityLabel3;
-    private javax.swing.JTextField districtField2;
-    private javax.swing.JTextField districtField3;
-    private javax.swing.JLabel districtLabel2;
-    private javax.swing.JLabel districtLabel3;
-    private javax.swing.JTextField emailField2;
-    private javax.swing.JTextField emailField3;
-    private javax.swing.JLabel emailLabel2;
-    private javax.swing.JLabel emailLabel3;
-    private javax.swing.JTextField houseNumField2;
-    private javax.swing.JTextField houseNumField3;
+    private javax.swing.JButton UpdateButton;
+    private javax.swing.JButton ViewButton;
+    private javax.swing.JComboBox<String> doctorCityDropdown;
+    private javax.swing.JLabel doctorCityLabel;
+    private javax.swing.JComboBox<String> doctorCommunityDropdown;
+    private javax.swing.JLabel doctorCommunityLabel;
+    private javax.swing.JTextField doctorEmailField;
+    private javax.swing.JLabel doctorEmailLabel;
+    private javax.swing.JTextField doctorHouseField;
+    private javax.swing.JLabel doctorHouseLabel;
+    private javax.swing.JTextField doctorNameField;
+    private javax.swing.JLabel doctorNameLabel;
+    private javax.swing.JTextField doctorPhoneField;
+    private javax.swing.JLabel doctorPhoneLabel;
+    private javax.swing.JTextField doctorRoadField;
+    private javax.swing.JLabel doctorRoadLabel;
+    private javax.swing.JTable doctorTable;
+    private javax.swing.JComboBox<String> hospitalDropdown;
+    private javax.swing.JLabel hospitalLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField nameField2;
-    private javax.swing.JTextField nameField3;
-    private javax.swing.JLabel nameLabel2;
-    private javax.swing.JLabel nameLabel3;
-    private javax.swing.JTextField phoneField2;
-    private javax.swing.JTextField phoneField3;
-    private javax.swing.JLabel phoneLabel2;
-    private javax.swing.JLabel phoneLabel3;
-    private javax.swing.JTextField pincodeField2;
-    private javax.swing.JTextField pincodeField3;
-    private javax.swing.JLabel pincodeLabel2;
-    private javax.swing.JLabel pincodeLabel3;
-    private javax.swing.JTextField roadField2;
-    private javax.swing.JTextField roadField3;
-    private javax.swing.JLabel roadLabel2;
-    private javax.swing.JLabel roadLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> newDoctorCityDropdown;
+    private javax.swing.JLabel newDoctorCityLabel;
+    private javax.swing.JComboBox<String> newDoctorCommunityDropdown;
+    private javax.swing.JLabel newDoctorCommunityLabel;
+    private javax.swing.JTextField newDoctorEmailField;
+    private javax.swing.JLabel newDoctorEmailLabel;
+    private javax.swing.JComboBox<String> newDoctorHospitalDropdown;
+    private javax.swing.JLabel newDoctorHospitalLabel;
+    private javax.swing.JTextField newDoctorHouseField;
+    private javax.swing.JLabel newDoctorHouseLabel;
+    private javax.swing.JTextField newDoctorNameField;
+    private javax.swing.JLabel newDoctorNameLabel;
+    private javax.swing.JTextField newDoctorPhoneField;
+    private javax.swing.JLabel newDoctorPhoneLabel;
+    private javax.swing.JTextField newDoctorRoadField;
+    private javax.swing.JLabel newDoctorRoadLabel;
     private javax.swing.JLabel search1;
-    private javax.swing.JTextField searchField1;
+    private javax.swing.JTextField searchDoctorField;
     // End of variables declaration//GEN-END:variables
+
+    private void populateDoctorTable() {
+        DefaultTableModel model = (DefaultTableModel) doctorTable.getModel();
+        model.setRowCount(0);
+        DoctorDirectory tempDoctors = new DoctorDirectory();
+        for (Hospital hosp : rootDataObj.getRootHospitalDirectory()) {
+            for (Doctor doc : hosp.getDoctors().getDoctors()) {
+                if (!tempDoctors.getDoctors().contains(doc)) {
+                    tempDoctors.addDoctor(doc);
+                }
+            }
+        }
+
+        for (Doctor doc : tempDoctors.getDoctors()) {
+            Object[] row = new Object[4];
+            row[0] = doc.getPersonId();
+            row[1] = doc; //access this obj for name, data passing for view/edit button
+            row[2] = doc.getCommunity();
+            row[3] = doc.getHospitalName().toString();
+            model.addRow(row);
+        }
+    }
+
+    private void populateDropdowns() {
+        ArrayList<City> cityListOptions = rootDataObj.getRootCityDirectory();
+        for (City cityOption : cityListOptions) {
+            newDoctorCityDropdown.addItem(cityOption.toString());
+            doctorCityDropdown.addItem(cityOption.toString());
+        }
+
+        ArrayList<Hospital> hospitalOptions = rootDataObj.getRootHospitalDirectory();
+        for (Hospital hospitalOption : hospitalOptions) {
+            newDoctorHospitalDropdown.addItem(hospitalOption.toString());
+            hospitalDropdown.addItem(hospitalOption.toString());
+
+        }
+    }
+
+    private void populateCommunityDropdown(City selectedCity) {
+        newDoctorCommunityDropdown.setEnabled(true);
+        doctorCommunityDropdown.setEnabled(true);
+        for (Community comm : selectedCity.getCommunityDirectory()) {
+            newDoctorCommunityDropdown.addItem(comm.toString());
+            doctorCommunityDropdown.addItem(comm.toString());
+        }
+    }
+
+    private void displayDetails(Doctor selectedDoctor) {
+        doctorNameField.setText(selectedDoctor.getName());
+        doctorEmailField.setText(selectedDoctor.getEmailId());
+        doctorPhoneField.setText(Long.toString(selectedDoctor.getPhoneNumber()));
+        House selectedHouse = selectedDoctor.getHouse();
+        doctorHouseField.setText(Integer.toString(selectedHouse.getHouseNumber()));
+        doctorRoadField.setText(selectedHouse.getRoadName());
+        doctorCityDropdown.setSelectedIndex(rootDataObj.getRootCityDirectory().indexOf(selectedDoctor.getCity()));
+        doctorCommunityDropdown.setSelectedIndex(selectedDoctor.getCity().getCommunityDirectory().indexOf(selectedDoctor.getCommunity()));
+        hospitalDropdown.setSelectedIndex(rootDataObj.getRootHospitalDirectory().indexOf(selectedDoctor.getHospitalName()));
+
+    }
+
+    private void clearFields() {
+        doctorNameField.setText("");
+        doctorEmailField.setText("");
+        doctorPhoneField.setText("");
+        doctorHouseField.setText("");
+        doctorRoadField.setText("");
+        doctorCityDropdown.setSelectedIndex(-1);
+        doctorCommunityDropdown.setSelectedIndex(-1);
+        hospitalDropdown.setSelectedIndex(-1);
+    }
 }
