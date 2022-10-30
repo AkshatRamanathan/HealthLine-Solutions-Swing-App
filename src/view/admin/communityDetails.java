@@ -357,7 +357,32 @@ public class communityDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
+        int selectedIndex = communityTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) communityTable.getModel();
+            Community selectedCommunity = (Community) model.getValueAt(selectedIndex, 1);
+            selectedCommunity.setAreaName(areaField1.getText());
+            selectedCommunity.setDistrict(districtField1.getText());
 
+            //remove community from existing city
+            for (City c : rootDataObj.getRootCityDirectory()) {
+                if (c.getCommunityDirectory().contains(selectedCommunity)) {
+                    c.getCommunityDirectory().remove(selectedCommunity);
+                }
+            }
+
+            //add community to new city
+            City selectedCity = rootDataObj.getRootCityDirectory().get(cityDropdown1.getSelectedIndex());
+            selectedCity.setPinCode(pincodeField1.getText());
+            selectedCity.addCommunity(selectedCommunity);
+            JOptionPane.showMessageDialog(this, "Community has been updated successfully!");
+
+            clearFields();
+            populateCommunityTable();
+
+        }
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
     private void searchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyTyped
