@@ -48,64 +48,72 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="newDoctorHouseLabel" max="32767" attributes="0"/>
-                                          <Component id="newDoctorRoadLabel" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="newDoctorRoadField" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="newDoctorHouseField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="newDoctorPhoneLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="newDoctorEmailLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="newDoctorNameLabel" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="newDoctorHouseLabel" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorRoadLabel" max="32767" attributes="0"/>
+                                              </Group>
                                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="newDoctorPhoneField" alignment="0" pref="200" max="32767" attributes="0"/>
-                                                  <Component id="newDoctorEmailField" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorRoadField" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorHouseField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="newDoctorNameField" min="-2" pref="200" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="newDoctorHospitalLabel" max="32767" attributes="0"/>
-                                          <Component id="newDoctorCityLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="newDoctorCommunityLabel" alignment="0" pref="82" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="newDoctorCommunityDropdown" pref="201" max="32767" attributes="0"/>
-                                                  <Component id="newDoctorCityDropdown" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorPhoneLabel" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorEmailLabel" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="newDoctorNameLabel" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="newDoctorPhoneField" alignment="0" pref="200" max="32767" attributes="0"/>
+                                                          <Component id="newDoctorEmailField" alignment="0" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="newDoctorNameField" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                              <Component id="newDoctorHospitalDropdown" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="newDoctorHospitalLabel" max="32767" attributes="0"/>
+                                              <Component id="newDoctorCityLabel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="newDoctorCommunityLabel" alignment="0" pref="82" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="newDoctorCommunityDropdown" min="-2" pref="201" max="-2" attributes="0"/>
+                                                      <Component id="newDoctorCityDropdown" min="-2" pref="201" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="newDoctorHospitalDropdown" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="SaveBtn1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="SaveBtn1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace pref="31" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -159,7 +167,7 @@
                                           <Component id="doctorRoadLabel" min="-2" max="-2" attributes="0"/>
                                           <Component id="hospitalLabel" alignment="1" min="-2" pref="61" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="doctorCityLabel" max="32767" attributes="0"/>
+                                      <Component id="doctorCityLabel" pref="99" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                           <Component id="doctorCommunityLabel" min="-2" pref="73" max="-2" attributes="0"/>
@@ -199,7 +207,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="181" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="doctorNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -294,9 +302,9 @@
                               <Component id="newDoctorHospitalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="newDoctorHospitalDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="SaveBtn1" min="-2" pref="31" max="-2" attributes="0"/>
-                          <EmptySpace pref="158" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

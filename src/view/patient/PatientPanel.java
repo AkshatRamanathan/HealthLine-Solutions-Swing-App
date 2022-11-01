@@ -421,7 +421,7 @@ public class PatientPanel extends javax.swing.JPanel {
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
 
-         int selectedRowIndex = doctorTable.getSelectedRow();
+        int selectedRowIndex = doctorTable.getSelectedRow();
         if(selectedRowIndex < 0 ){
             JOptionPane.showMessageDialog(this, "Please select a row to view");
             return;

@@ -4,9 +4,22 @@
  */
 package view.admin;
 
+import java.util.ArrayList;
+import java.util.UUID;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Admin;
+import model.City;
+import model.Community;
+import model.Doctor;
+import model.Encounter;
 import model.Hospital;
+import model.House;
 import model.MainSystem;
+import model.Patient;
+import model.PatientDirectory;
 
 /**
  *
@@ -18,9 +31,13 @@ public class hospitalDetails extends javax.swing.JPanel {
      * Creates new form hospitalDetails
      */
     Admin admin;
+    MainSystem rootDataObj;
     public hospitalDetails(Admin admin, MainSystem rootDataObj) {
         this.admin = admin;
+        this.rootDataObj = rootDataObj;
         initComponents();
+        populateDropdowns();
+        populateTable();
     }
 
     /**
@@ -34,83 +51,40 @@ public class hospitalDetails extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         Title = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
         nameLabel = new javax.swing.JLabel();
-        cityField = new javax.swing.JTextField();
-        communityField = new javax.swing.JTextField();
-        communityLabel = new javax.swing.JLabel();
-        cityLabel = new javax.swing.JLabel();
-        SaveBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        EditBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         ViewBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
-        search = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
-        nameLabel1 = new javax.swing.JLabel();
-        emailLabel1 = new javax.swing.JLabel();
-        phoneLabel1 = new javax.swing.JLabel();
-        address1 = new javax.swing.JLabel();
-        roadLabel1 = new javax.swing.JLabel();
-        roadField1 = new javax.swing.JTextField();
-        houseNumField1 = new javax.swing.JTextField();
-        phoneField1 = new javax.swing.JTextField();
-        emailField1 = new javax.swing.JTextField();
-        nameField1 = new javax.swing.JTextField();
-        areaField1 = new javax.swing.JTextField();
-        districtField1 = new javax.swing.JTextField();
-        cityField1 = new javax.swing.JTextField();
-        pincodeField1 = new javax.swing.JTextField();
-        pincodeLabel1 = new javax.swing.JLabel();
         cityLabel1 = new javax.swing.JLabel();
-        districtLabel1 = new javax.swing.JLabel();
-        areaLabel1 = new javax.swing.JLabel();
-        UpdateBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        hospitalTable = new javax.swing.JTable();
+        nameLabel2 = new javax.swing.JLabel();
+        txtname2 = new javax.swing.JTextField();
+        txthospname1 = new javax.swing.JTextField();
+        uodateBtn = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        newCityDropdown = new javax.swing.JComboBox<>();
+        newDoctorCommunityLabel = new javax.swing.JLabel();
+        cityDropdown = new javax.swing.JComboBox<>();
+        communityDropdown = new javax.swing.JComboBox<>();
+        cityLabel3 = new javax.swing.JLabel();
+        newDoctorCommunityLabel1 = new javax.swing.JLabel();
+        newCommunityDropdown = new javax.swing.JComboBox<>();
 
         Title.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Add New Hospital Details Here");
 
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
-
         nameLabel.setText("Hospital Name:");
 
-        communityLabel.setText("Hospital Community:");
-
-        cityLabel.setText("Hospital City:");
-
-        SaveBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        SaveBtn.setText("Save Hospital Information");
-        SaveBtn.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        addBtn.setText("Add Hospital");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveBtnActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Email ID", "Phone Number", "Area Name", "CIty", "PIN Code"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View Hospital Details Here");
-
-        EditBtn.setText("EDIT");
 
         ViewBtn.setText("VIEW");
         ViewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -126,43 +100,77 @@ public class hospitalDetails extends javax.swing.JPanel {
             }
         });
 
-        search.setText("Search Doctor Here:");
-
-        nameLabel1.setText("Name:");
-
-        emailLabel1.setText("Emaill ID:");
-
-        phoneLabel1.setText("Phone Number:");
-
-        address1.setText("House Number:");
-
-        roadLabel1.setText("Road Name:");
-
-        houseNumField1.addActionListener(new java.awt.event.ActionListener() {
+        searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNumField1ActionPerformed(evt);
+                searchFieldActionPerformed(evt);
             }
         });
-
-        nameField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameField1ActionPerformed(evt);
-            }
-        });
-
-        pincodeLabel1.setText("PIN Code:");
 
         cityLabel1.setText("City:");
 
-        districtLabel1.setText("District:");
+        hospitalTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Area Name", "District", "CIty", "PIN Code"
+            }
+        ));
+        jScrollPane1.setViewportView(hospitalTable);
 
-        areaLabel1.setText("Area Name:");
+        nameLabel2.setText("Hospital Name:");
 
-        UpdateBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        UpdateBtn.setText("Update Hospital Information");
-        UpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+        txtname2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateBtnActionPerformed(evt);
+                txtname2ActionPerformed(evt);
+            }
+        });
+
+        txthospname1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txthospname1ActionPerformed(evt);
+            }
+        });
+
+        uodateBtn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        uodateBtn.setText("Update Hospital");
+        uodateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uodateBtnActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        newCityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCityDropdownActionPerformed(evt);
+            }
+        });
+
+        newDoctorCommunityLabel.setText("Community");
+
+        cityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityDropdownActionPerformed(evt);
+            }
+        });
+
+        cityLabel3.setText("City:");
+
+        newDoctorCommunityLabel1.setText("Community");
+
+        newCommunityDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCommunityDropdownActionPerformed(evt);
             }
         });
 
@@ -171,266 +179,277 @@ public class hospitalDetails extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(roadLabel1)
-                            .addComponent(address1))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(roadField1)
-                            .addComponent(houseNumField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(phoneLabel1)
-                            .addComponent(emailLabel1)
-                            .addComponent(nameLabel1))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(phoneField1)
-                                    .addComponent(emailField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(districtLabel1)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cityLabel1)
-                    .addComponent(areaLabel1)
-                    .addComponent(pincodeLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cityField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(districtField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(areaField1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pincodeField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(ViewBtn)
-                        .addGap(58, 58, 58)
-                        .addComponent(EditBtn)
-                        .addGap(56, 56, 56)
-                        .addComponent(DeleteBtn)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(SaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(296, 296, 296))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(238, 238, 238))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(nameLabel)
+                    .addComponent(newDoctorCommunityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cityLabel)
-                            .addComponent(communityLabel)
-                            .addComponent(nameLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cityField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(communityField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txthospname1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(newCityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(newCommunityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cityLabel3)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DeleteBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(ViewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameLabel2)
+                                .addComponent(newDoctorCommunityLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uodateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(searchBtn)
+                            .addGap(3, 3, 3))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtname2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()))
+                    .addComponent(communityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(16, 16, 16)
                 .addComponent(Title)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cityLabel)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(communityLabel)
-                    .addComponent(communityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(SaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchBtn))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(ViewBtn)
+                                            .addComponent(cityLabel1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(DeleteBtn)
+                                            .addComponent(newDoctorCommunityLabel)
+                                            .addComponent(newCommunityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(newCityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameLabel)
+                        .addComponent(txthospname1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EditBtn)
-                    .addComponent(ViewBtn)
-                    .addComponent(DeleteBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                    .addComponent(nameLabel2)
+                    .addComponent(txtname2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel1)
-                    .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaLabel1)
-                    .addComponent(areaField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityLabel3))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel1)
-                    .addComponent(emailField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel1)
-                    .addComponent(districtField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneLabel1)
-                    .addComponent(phoneField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel1)
-                    .addComponent(cityField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(address1)
-                    .addComponent(houseNumField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pincodeLabel1)
-                    .addComponent(pincodeField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roadLabel1)
-                    .addComponent(roadField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(communityDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newDoctorCommunityLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(uodateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1448, 1448, 1448))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
-        // TODO add your handling code here:
-        //        int i = jTable1.getSelectedRow();
-        //        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //        if(i >= 0){
-            //            model.setValueAt(nameField1.getText(), i, 0);
-            //            model.setValueAt(emailField1.getText(), i, 1);
-            //            model.setValueAt(phoneField1.getText(), i, 2);
-            //            model.setValueAt(houseNumField1.getText(), i, 3);
-            //            model.setValueAt(roadField1.getText(), i, 4);
-            //            model.setValueAt(areaField1.getText(), i, 5);
-            //            model.setValueAt(districtField1.getText(), i, 6);
-            //            model.setValueAt(cityField1.getText(), i, 7);
-            //            model.setValueAt(pincodeField1.getText(), i, 8);
-            //        }else{
-            //            JOptionPane.showMessageDialog(null, "ERROR!");
-            //        }
-    }//GEN-LAST:event_UpdateBtnActionPerformed
-
-    private void nameField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameField1ActionPerformed
-
-    private void houseNumField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseNumField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_houseNumField1ActionPerformed
-
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         // TODO add your handling code here:
+        int selectedIndex = hospitalTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to be deleted", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+            Hospital selectedHospital = (Hospital) model.getValueAt(selectedIndex, 0);
+            this.rootDataObj.deleteRootHospital(selectedHospital);
+            JOptionPane.showMessageDialog(this, "Hospital is deleted successfully.");
+            populateTable();
+        }
+        clearFields();
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void ViewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBtnActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = hospitalTable.getSelectedRow();
+        if(selectedRowIndex < 0 ){
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+        Hospital selectedHos = (Hospital) model.getValueAt(selectedRowIndex, 0);
+        displayDetails(selectedHos);
     }//GEN-LAST:event_ViewBtnActionPerformed
 
-    private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-          Hospital hospital = new Hospital();
-          hospital.setHospitalName(nameField.getText());
-//          hospital.setHospitalCity(cityField.getText());
-//          hospital.setHospitalCommunity(communityField);
+        Hospital newHospital = new Hospital();
+        newHospital.setHospitalName(txthospname1.getText());
+        newHospital.setHospitalCity(rootDataObj.getRootCityDirectory().get(newCityDropdown.getSelectedIndex()));
+        newHospital.setHospitalCommunity(newHospital.getHospitalCity().getCommunityDirectory().get(newCommunityDropdown.getSelectedIndex()));
+        this.rootDataObj.getRootHospitalDirectory().add(newHospital);
+        populateTable();
+        JOptionPane.showMessageDialog(this, "New Hospital saved successfully!");
+        txthospname1.setText("");
+        newCommunityDropdown.setSelectedIndex(-1);
+        newCityDropdown.setSelectedIndex(-1);
+    }//GEN-LAST:event_addBtnActionPerformed
 
-//        Patient patient = new Patient();
-//        patient.setName(nameField.getText());
-//        patient.setEmailId(emailField.getText());
-//        patient.setPhoneNumber(Long.parseLong(phoneField.getText()));
-//        patient.setPersonId(UUID.randomUUID());
-//        House house = new House();
-//        house.setHouseNumber(Integer.parseInt(houseNumField.getText()));
-//        house.setRoadName(roadField.getText());
-//        Community newCommunity = new Community(areaField.getText(), districtField.getText());
-//        patient.setCommunity(newCommunity);
-//        City newCity = new City(cityField.getText(), pincodeField.getText());
-//        patient.setCity(newCity);
-//        JOptionPane.showMessageDialog(this, "New Patient Information Saved!");
+    private void displayDetails(Hospital selectedHos) {
+        txtname2.setText(selectedHos.getHospitalName());
+        cityDropdown.setSelectedIndex(rootDataObj.getRootCityDirectory().indexOf(selectedHos.getHospitalCity()));
+        communityDropdown.setSelectedIndex(selectedHos.getHospitalCity().getCommunityDirectory().indexOf(selectedHos.getHospitalCommunity()));
 
-
-        //navigate to screen-2C with "patient object" created here
-    }//GEN-LAST:event_SaveBtnActionPerformed
-
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+    }
+    private void populateDropdowns() {
+        ArrayList<City> cityListOptions = rootDataObj.getRootCityDirectory();
+        for (City cityOption : cityListOptions) {
+            newCityDropdown.addItem(cityOption.toString());
+            cityDropdown.addItem(cityOption.toString());
+        }
+    }
+        
+    private void txtname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtname2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
+    }//GEN-LAST:event_txtname2ActionPerformed
 
+    private void txthospname1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthospname1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txthospname1ActionPerformed
 
+    private void uodateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uodateBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = hospitalTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+            Hospital selectedHospital = (Hospital) this.rootDataObj.getRootHospitalDirectory().get(selectedIndex);
+            selectedHospital.setHospitalName(txtname2.getText());
+            City selectedCity = rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+            selectedHospital.setHospitalCity(selectedCity);
+            selectedHospital.setHospitalCommunity(selectedCity.getCommunityDirectory().get(communityDropdown.getSelectedIndex()));
+            JOptionPane.showMessageDialog(this, "Hospital updated successfully!");
+            populateTable();
+            clearFields();
+        }
+    }//GEN-LAST:event_uodateBtnActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void newCityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCityDropdownActionPerformed
+        // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(newCityDropdown.getSelectedIndex());
+        newCommunityDropdown.removeAllItems();
+         for (Community comm : selectedCity.getCommunityDirectory()) {
+            newCommunityDropdown.addItem(comm.toString());
+        }
+    }//GEN-LAST:event_newCityDropdownActionPerformed
+
+    private void cityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityDropdownActionPerformed
+        // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+        communityDropdown.removeAllItems();
+         for (Community comm : selectedCity.getCommunityDirectory()) {
+            communityDropdown.addItem(comm.toString());
+        }
+    }//GEN-LAST:event_cityDropdownActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        hospitalTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(searchField.getText()));
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void newCommunityDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCommunityDropdownActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCommunityDropdownActionPerformed
+
+    
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+        model.setRowCount(0);
+
+        for (Hospital hosp: this.rootDataObj.getRootHospitalDirectory()) {
+            Object[] row = new Object[5];
+            row[0] = hosp;
+            row[1] = hosp.getHospitalCommunity().getAreaName();
+            row[2] = hosp.getHospitalCommunity().getDistrict();
+            row[3] = hosp.getHospitalCity().getCityName();
+            row[4] = hosp.getHospitalCity().getPinCode();
+            model.addRow(row);
+        }
+    }
+
+     private void clearFields() {
+        txtname2.setText("");
+        communityDropdown.setSelectedIndex(-1);
+        cityDropdown.setSelectedIndex(-1);
+       
+    }
+
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DeleteBtn;
-    private javax.swing.JButton EditBtn;
-    private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel Title;
-    private javax.swing.JButton UpdateBtn;
     private javax.swing.JButton ViewBtn;
-    private javax.swing.JLabel address1;
-    private javax.swing.JTextField areaField1;
-    private javax.swing.JLabel areaLabel1;
-    private javax.swing.JTextField cityField;
-    private javax.swing.JTextField cityField1;
-    private javax.swing.JLabel cityLabel;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JComboBox<String> cityDropdown;
     private javax.swing.JLabel cityLabel1;
-    private javax.swing.JTextField communityField;
-    private javax.swing.JLabel communityLabel;
-    private javax.swing.JTextField districtField1;
-    private javax.swing.JLabel districtLabel1;
-    private javax.swing.JTextField emailField1;
-    private javax.swing.JLabel emailLabel1;
-    private javax.swing.JTextField houseNumField1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel cityLabel3;
+    private javax.swing.JComboBox<String> communityDropdown;
+    private javax.swing.JTable hospitalTable;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JTextField nameField1;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel nameLabel1;
-    private javax.swing.JTextField phoneField1;
-    private javax.swing.JLabel phoneLabel1;
-    private javax.swing.JTextField pincodeField1;
-    private javax.swing.JLabel pincodeLabel1;
-    private javax.swing.JTextField roadField1;
-    private javax.swing.JLabel roadLabel1;
-    private javax.swing.JLabel search;
+    private javax.swing.JLabel nameLabel2;
+    private javax.swing.JComboBox<String> newCityDropdown;
+    private javax.swing.JComboBox<String> newCommunityDropdown;
+    private javax.swing.JLabel newDoctorCommunityLabel;
+    private javax.swing.JLabel newDoctorCommunityLabel1;
+    private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchField;
+    private javax.swing.JTextField txthospname1;
+    private javax.swing.JTextField txtname2;
+    private javax.swing.JButton uodateBtn;
     // End of variables declaration//GEN-END:variables
 }
