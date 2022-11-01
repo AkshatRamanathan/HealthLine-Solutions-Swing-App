@@ -12,7 +12,7 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return this.getPersonId().toString();
+        return this.getName().toString();
     }
 
 }

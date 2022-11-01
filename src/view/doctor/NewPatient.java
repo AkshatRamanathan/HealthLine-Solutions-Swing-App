@@ -299,10 +299,10 @@ public class NewPatient extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (phoneField.getText().length() != 10) {
             phoneField.setForeground(Color.RED);
-            phoneField.setForeground(Color.RED);
+            phoneLabel.setForeground(Color.RED);
         } else {
             phoneField.setForeground(Color.BLACK);
-            phoneField.setForeground(Color.BLACK);
+            phoneLabel.setForeground(Color.BLACK);
 
         }
     }//GEN-LAST:event_phoneFieldKeyReleased

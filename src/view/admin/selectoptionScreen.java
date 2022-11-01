@@ -13,6 +13,7 @@ import model.Admin;
 import model.City;
 import model.Community;
 import model.House;
+import model.MainSystem;
 import model.Patient;
 import view.admin.patientDetails;
 import view.admin.hospitalDetails;
@@ -21,20 +22,26 @@ import view.admin.hospitalDetails;
  *
  * @author bharv
  */
-
 public class selectoptionScreen extends javax.swing.JPanel {
+
     /**
      * Creates new form selectoptionScreen
      */
     Admin admin;
     JPanel bottomPanel;
+    MainSystem rootDataObj;
 
-    public selectoptionScreen(JPanel bottomPanel, Admin selectedAdmin) {
-        admin = new Admin();
+    public selectoptionScreen(JPanel bottomPanel, MainSystem rootDataObj, Admin selectedAdmin) {
+        this.bottomPanel = bottomPanel;
+        this.admin = selectedAdmin;
+        this.rootDataObj = rootDataObj;
         initComponents();
+        PatientBtn.setEnabled(false);
+        DoctorBtn.setEnabled(false);
+        HospitalBtn.setEnabled(false);
+        CommunityBtn.setEnabled(false);
+        adminTypeSetter(admin);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,21 +174,16 @@ public class selectoptionScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoctorBtnActionPerformed
-        // TODO add your handling code here:
-//        DoctorScreen DoctorScreen = new DoctorScreen(bottomPanel);
-//        bottomPanel.add("DoctorScreen", DoctorScreen);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
-        doctorDetails DoctorDetails = new doctorDetails(admin);
-            jSplitPane1.setRightComponent(DoctorDetails);
+        doctorDetails DoctorDetails = new doctorDetails(admin, this.rootDataObj);
+        jSplitPane1.setRightComponent(DoctorDetails);
     }//GEN-LAST:event_DoctorBtnActionPerformed
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         // TODO add your handling code here:
-//        adminScreen admins = new adminScreen(bottomPanel);
-//        bottomPanel.add("adminscreen", admins);
-//        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-//        layout.next(bottomPanel);
+        adminScreen admins = new adminScreen(bottomPanel, rootDataObj);
+        bottomPanel.add("adminScreen", admins);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
     }//GEN-LAST:event_BackBtnActionPerformed
 
     private void PatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatientBtnActionPerformed
@@ -191,22 +193,22 @@ public class selectoptionScreen extends javax.swing.JPanel {
 //        CardLayout layout = (CardLayout) bottomPanel.getLayout();
 //        layout.next(bottomPanel);
 
-        patientDetails PatientDetails = new patientDetails(admin);
-            jSplitPane1.setRightComponent(PatientDetails);
-        
+        patientDetails PatientDetails = new patientDetails(admin, this.rootDataObj);
+        jSplitPane1.setRightComponent(PatientDetails);
+
     }//GEN-LAST:event_PatientBtnActionPerformed
 
     private void HospitalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalBtnActionPerformed
         // TODO add your handling code here:
-        hospitalDetails HospitalDetails = new hospitalDetails(admin);
-            jSplitPane1.setRightComponent(HospitalDetails);
-            
+        hospitalDetails HospitalDetails = new hospitalDetails(admin, this.rootDataObj);
+        jSplitPane1.setRightComponent(HospitalDetails);
+
     }//GEN-LAST:event_HospitalBtnActionPerformed
 
     private void CommunityBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityBtnActionPerformed
         // TODO add your handling code here:
-        communityDetails CommunityDetails = new communityDetails(admin);
-            jSplitPane1.setRightComponent(CommunityDetails);
+        communityDetails CommunityDetails = new communityDetails(admin, this.rootDataObj);
+        jSplitPane1.setRightComponent(CommunityDetails);
     }//GEN-LAST:event_CommunityBtnActionPerformed
 
 
@@ -221,4 +223,24 @@ public class selectoptionScreen extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void adminTypeSetter(Admin admin) {
+
+        switch (admin.getType()) {
+            case "Community Admin":
+                CommunityBtn.setEnabled(true);
+                break;
+            case "Hospital Admin":
+                PatientBtn.setEnabled(true);
+                DoctorBtn.setEnabled(true);
+                HospitalBtn.setEnabled(true);
+                break;
+            default:
+                CommunityBtn.setEnabled(true);
+                PatientBtn.setEnabled(true);
+                DoctorBtn.setEnabled(true);
+                HospitalBtn.setEnabled(true);
+                break;
+        }
+    }
 }
