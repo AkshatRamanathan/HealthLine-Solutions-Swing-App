@@ -368,15 +368,20 @@ public class hospitalDetails extends javax.swing.JPanel {
         if (selectedIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row to update", "Error - No selection", JOptionPane.WARNING_MESSAGE);
         } else {
-            DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
-            Hospital selectedHospital = (Hospital) this.rootDataObj.getRootHospitalDirectory().get(selectedIndex);
-            selectedHospital.setHospitalName(txtname2.getText());
-            City selectedCity = rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
-            selectedHospital.setHospitalCity(selectedCity);
-            selectedHospital.setHospitalCommunity(selectedCity.getCommunityDirectory().get(communityDropdown.getSelectedIndex()));
-            JOptionPane.showMessageDialog(this, "Hospital updated successfully!");
-            populateTable();
-            clearFields();
+             if(isValid(txtname2.getText()) || communityDropdown.getSelectedItem() == null || 
+                cityDropdown.getSelectedItem() == null ) {
+                JOptionPane.showMessageDialog(this, "Fill all the fields");
+            } else {
+                DefaultTableModel model = (DefaultTableModel) hospitalTable.getModel();
+                Hospital selectedHospital = (Hospital) this.rootDataObj.getRootHospitalDirectory().get(selectedIndex);
+                selectedHospital.setHospitalName(txtname2.getText());
+                City selectedCity = rootDataObj.getRootCityDirectory().get(cityDropdown.getSelectedIndex());
+                selectedHospital.setHospitalCity(selectedCity);
+                selectedHospital.setHospitalCommunity(selectedCity.getCommunityDirectory().get(communityDropdown.getSelectedIndex()));
+                JOptionPane.showMessageDialog(this, "Hospital updated successfully!");
+                populateTable();
+                clearFields();
+             }  
         }
     }//GEN-LAST:event_uodateBtnActionPerformed
 

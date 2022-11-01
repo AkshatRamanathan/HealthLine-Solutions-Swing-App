@@ -128,6 +128,11 @@ public class doctorDetails extends javax.swing.JPanel {
             }
         });
 
+        newDoctorPhoneField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newDoctorPhoneFieldActionPerformed(evt);
+            }
+        });
         newDoctorPhoneField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 newDoctorPhoneFieldKeyTyped(evt);
@@ -634,6 +639,10 @@ public class doctorDetails extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_newDoctorPhoneFieldKeyTyped
+
+    private void newDoctorPhoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDoctorPhoneFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newDoctorPhoneFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

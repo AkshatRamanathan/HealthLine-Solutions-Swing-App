@@ -5,6 +5,8 @@
 package view.admin;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -41,6 +43,8 @@ public class patientDetails extends javax.swing.JPanel {
         initComponents();
         populateCityValues();
         populateTable();
+//        cityField.setSelectedIndex(-1);
+//        communityField.setSelectedIndex(-1);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,16 +73,12 @@ public class patientDetails extends javax.swing.JPanel {
         phoneField = new javax.swing.JTextField();
         emailField = new javax.swing.JTextField();
         nameField = new javax.swing.JTextField();
-        areaField = new javax.swing.JTextField();
-        districtField = new javax.swing.JTextField();
-        pincodeField = new javax.swing.JTextField();
-        pincodeLabel3 = new javax.swing.JLabel();
         cityLabel3 = new javax.swing.JLabel();
-        districtLabel3 = new javax.swing.JLabel();
-        areaLabel3 = new javax.swing.JLabel();
         UpdateBtn1 = new javax.swing.JButton();
         cityField = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        cityLabel4 = new javax.swing.JLabel();
+        communityField = new javax.swing.JComboBox<>();
 
         patientTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,19 +138,19 @@ public class patientDetails extends javax.swing.JPanel {
             }
         });
 
+        phoneField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                phoneFieldKeyTyped(evt);
+            }
+        });
+
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameFieldActionPerformed(evt);
             }
         });
 
-        pincodeLabel3.setText("PIN Code:");
-
         cityLabel3.setText("City:");
-
-        districtLabel3.setText("District:");
-
-        areaLabel3.setText("Area Name:");
 
         UpdateBtn1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         UpdateBtn1.setText("Update Patient Information");
@@ -173,6 +173,14 @@ public class patientDetails extends javax.swing.JPanel {
             }
         });
 
+        cityLabel4.setText("Community:");
+
+        communityField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                communityFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -180,8 +188,8 @@ public class patientDetails extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(ViewBtn1)
                             .addGap(18, 18, 18)
@@ -193,44 +201,37 @@ public class patientDetails extends javax.swing.JPanel {
                             .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton1)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(UpdateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(roadLabel3)
-                                        .addComponent(address3))
-                                    .addGap(27, 27, 27)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(roadField)
-                                        .addComponent(houseNumField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(phoneLabel3)
-                                        .addComponent(emailLabel3)
-                                        .addComponent(nameLabel3))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addGap(27, 27, 27)
-                                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(phoneField)
-                                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGap(26, 26, 26)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(districtLabel3)
-                                .addComponent(cityLabel3)
-                                .addComponent(areaLabel3)
-                                .addComponent(pincodeLabel3))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(districtField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(areaField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pincodeField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addComponent(cityField, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(address3)
+                                .addGap(27, 27, 27)
+                                .addComponent(houseNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(phoneLabel3)
+                                    .addComponent(emailLabel3)
+                                    .addComponent(nameLabel3))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(phoneField)
+                                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roadLabel3)
+                            .addComponent(cityLabel4)
+                            .addComponent(cityLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(roadField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(cityField, 0, 200, Short.MAX_VALUE)
+                            .addComponent(communityField, 0, 200, Short.MAX_VALUE)
+                            .addComponent(UpdateBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -251,36 +252,36 @@ public class patientDetails extends javax.swing.JPanel {
                     .addComponent(ViewBtn1)
                     .addComponent(DeleteBtn1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel3)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(areaLabel3)
-                    .addComponent(areaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel3)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel3)
-                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameLabel3)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roadLabel3)
+                            .addComponent(roadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLabel3)
+                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cityLabel3)
+                        .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLabel3)
                     .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cityLabel3)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(address3)
-                    .addComponent(houseNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pincodeLabel3)
-                    .addComponent(pincodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roadLabel3)
-                    .addComponent(roadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(UpdateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                    .addComponent(cityLabel4)
+                    .addComponent(communityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(address3)
+                            .addComponent(houseNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(UpdateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -301,8 +302,57 @@ public class patientDetails extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean isValid(String val) {
+        return val.equals("");
+    }
+    
     private void UpdateBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtn1ActionPerformed
         // TODO add your handling code here:
+        int selectedIndex = patientTable.getSelectedRow();
+        if (selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to be updated", "Error - No selection", JOptionPane.WARNING_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+            Patient selectedPatient = (Patient) model.getValueAt(selectedIndex, 0);
+            
+            
+            for (Hospital hospObj: this.rootDataObj.getRootHospitalDirectory()) {
+                for (Encounter enc : hospObj.getEncounters().getEncounter()) {
+                    System.out.println(enc.getPatient().getPersonId());
+                    System.out.println(selectedPatient.getPersonId());
+                    if(enc.getPatient().getPersonId() == selectedPatient.getPersonId()) {
+                        if(isValid(nameField.getText()) || isValid(emailField.getText()) || isValid(phoneField.getText()) || 
+                                isValid(houseNumField.getText()) || isValid(roadField.getText()) || cityField.getSelectedItem() == null || 
+                            communityField.getSelectedItem() == null ) {
+                            JOptionPane.showMessageDialog(this, "Fill all the fields");
+                        } else {
+                            Patient updatePat = enc.getPatient();
+                            updatePat.setName(nameField.getText());
+                            updatePat.setEmailId(emailField.getText());
+                            updatePat.setPhoneNumber(Long.parseLong(phoneField.getText()));
+
+                             House newHouse = new House();
+                             newHouse.setHouseNumber(Integer.parseInt(houseNumField.getText()));
+                             newHouse.setRoadName(roadField.getText());
+                             updatePat.setHouse(newHouse);
+                             City selectedCity = rootDataObj.getRootCityDirectory().get(cityField.getSelectedIndex());
+                             updatePat.setCity(selectedCity);
+                             updatePat.setCommunity(selectedCity.getCommunityDirectory().get(communityField.getSelectedIndex()));
+                             JOptionPane.showMessageDialog(this, "Doctor updated successfully!");
+                            populateTable();
+                            nameField.setText("");
+                            emailField.setText("");
+                            phoneField.setText("");
+                            houseNumField.setText("");
+                            roadField.setText("");
+                            communityField.setSelectedIndex(-1);
+                            cityField.setSelectedIndex(-1);
+                        }
+                    }
+                }
+            }
+           
+        }
     }//GEN-LAST:event_UpdateBtn1ActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -321,9 +371,22 @@ public class patientDetails extends javax.swing.JPanel {
         } else {
             DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
             Patient selectedPatient = (Patient) model.getValueAt(selectedIndex, 0);
-//            this.rootDataObj.getRootHospitalDirectory().;
-//            JOptionPane.showMessageDialog(this, "Hospital is deleted successfully.");
-//            populateTable();
+            
+            Hospital removeHosp = null;
+            Encounter removeEnc = null;
+            for (Hospital hospObj: this.rootDataObj.getRootHospitalDirectory()) {
+                for (Encounter enc : hospObj.getEncounters().getEncounter()) {
+                    System.out.println(enc.getPatient().getPersonId());
+                    System.out.println(selectedPatient.getPersonId());
+                    if(enc.getPatient().getPersonId() == selectedPatient.getPersonId()) {
+                        removeHosp = hospObj;
+                        removeEnc = enc;
+                    }
+                }
+            }
+            removeHosp.getEncounters().deleteEncounter(removeEnc);
+            JOptionPane.showMessageDialog(this, "Patient is deleted successfully.");
+            populateTable();
         }
     }//GEN-LAST:event_DeleteBtn1ActionPerformed
 
@@ -342,16 +405,21 @@ public class patientDetails extends javax.swing.JPanel {
         phoneField.setText(String.valueOf(selectedPat.getPhoneNumber()));
         houseNumField.setText(String.valueOf(selectedPat.getHouse().getHouseNumber()));
         roadField.setText(String.valueOf(selectedPat.getHouse().getRoadName()));
-        areaField.setText(String.valueOf(selectedPat.getCommunity().getAreaName()));
-        districtField.setText(String.valueOf(selectedPat.getCommunity().getDistrict()));
         cityField.setSelectedItem(String.valueOf(selectedPat.getCity().getCityName()));
-        pincodeField.setText(String.valueOf(selectedPat.getCity().getPinCode()));
+        communityField.setSelectedItem(String.valueOf(selectedPat.getCommunity().getDistrict()));
+        
     }//GEN-LAST:event_ViewBtn1ActionPerformed
 
     private void cityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityFieldActionPerformed
         // TODO add your handling code here:
+        City selectedCity = this.rootDataObj.getRootCityDirectory().get(cityField.getSelectedIndex());
+        communityField.removeAllItems();
+         for (Community comm : selectedCity.getCommunityDirectory()) {
+            communityField.addItem(comm.toString());
+        }
     }//GEN-LAST:event_cityFieldActionPerformed
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
@@ -367,6 +435,22 @@ public class patientDetails extends javax.swing.JPanel {
     private void searchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldKeyPressed
+
+    private void communityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_communityFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_communityFieldActionPerformed
+
+    private void phoneFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneFieldKeyTyped
+        // TODO add your handling code here:
+         if (phoneField.getText().length() != 10) {
+            phoneField.setForeground(Color.RED);
+            phoneField.setForeground(Color.RED);
+        } else {
+            phoneField.setForeground(Color.BLACK);
+            phoneField.setForeground(Color.BLACK);
+
+        }
+    }//GEN-LAST:event_phoneFieldKeyTyped
 
     private void populateCityValues() {
         for(City cityObj: this.rootDataObj.getRootCityDirectory()){
@@ -404,12 +488,10 @@ public class patientDetails extends javax.swing.JPanel {
     private javax.swing.JButton UpdateBtn1;
     private javax.swing.JButton ViewBtn1;
     private javax.swing.JLabel address3;
-    private javax.swing.JTextField areaField;
-    private javax.swing.JLabel areaLabel3;
     private javax.swing.JComboBox<String> cityField;
     private javax.swing.JLabel cityLabel3;
-    private javax.swing.JTextField districtField;
-    private javax.swing.JLabel districtLabel3;
+    private javax.swing.JLabel cityLabel4;
+    private javax.swing.JComboBox<String> communityField;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel3;
     private javax.swing.JTextField houseNumField;
@@ -422,8 +504,6 @@ public class patientDetails extends javax.swing.JPanel {
     private javax.swing.JTable patientTable;
     private javax.swing.JTextField phoneField;
     private javax.swing.JLabel phoneLabel3;
-    private javax.swing.JTextField pincodeField;
-    private javax.swing.JLabel pincodeLabel3;
     private javax.swing.JTextField roadField;
     private javax.swing.JLabel roadLabel3;
     private javax.swing.JLabel search1;
