@@ -316,18 +316,28 @@ public class hospitalDetails extends javax.swing.JPanel {
         displayDetails(selectedHos);
     }//GEN-LAST:event_ViewBtnActionPerformed
 
+    private boolean isValid(String val) {
+        return val.equals("");
+    }
+    
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-        Hospital newHospital = new Hospital();
-        newHospital.setHospitalName(txthospname1.getText());
-        newHospital.setHospitalCity(rootDataObj.getRootCityDirectory().get(newCityDropdown.getSelectedIndex()));
-        newHospital.setHospitalCommunity(newHospital.getHospitalCity().getCommunityDirectory().get(newCommunityDropdown.getSelectedIndex()));
-        this.rootDataObj.getRootHospitalDirectory().add(newHospital);
-        populateTable();
-        JOptionPane.showMessageDialog(this, "New Hospital saved successfully!");
-        txthospname1.setText("");
-        newCommunityDropdown.setSelectedIndex(-1);
-        newCityDropdown.setSelectedIndex(-1);
+        if(isValid(txthospname1.getText()) || newCommunityDropdown.getSelectedItem() == null || 
+                newCityDropdown.getSelectedItem() == null ) {
+            JOptionPane.showMessageDialog(this, "Fill all the fields");
+        } else {
+             Hospital newHospital = new Hospital();
+            newHospital.setHospitalName(txthospname1.getText());
+            newHospital.setHospitalCity(rootDataObj.getRootCityDirectory().get(newCityDropdown.getSelectedIndex()));
+            newHospital.setHospitalCommunity(newHospital.getHospitalCity().getCommunityDirectory().get(newCommunityDropdown.getSelectedIndex()));
+            this.rootDataObj.getRootHospitalDirectory().add(newHospital);
+            populateTable();
+            JOptionPane.showMessageDialog(this, "New Hospital saved successfully!");
+            txthospname1.setText("");
+            newCommunityDropdown.setSelectedIndex(-1);
+            newCityDropdown.setSelectedIndex(-1);
+        }
+       
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void displayDetails(Hospital selectedHos) {
