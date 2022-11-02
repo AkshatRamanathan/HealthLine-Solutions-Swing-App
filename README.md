@@ -11,8 +11,8 @@ The community admins can modify or update data belonging to their community. The
 
 We have taken the following assumptions:
 
-1. The community admins can only perform CRUD actions to data in their community (hospitals, hospitals list, doctors, doctors list)
-2. The System admins can perform CRUD actions on all the data in the application (including encounter data).
+1. The System admins can perform CRUD actions on all the data in the application (including encounter data).
+2. The community admins can only perform CRUD actions to data in their community
 
 ## Class Diagram
 
