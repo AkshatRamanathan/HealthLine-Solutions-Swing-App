@@ -56,7 +56,6 @@ public class doctorScreen extends javax.swing.JPanel {
         subTitleLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         subTitleLabel1.setText("Please Enter your Doctor ID Number Below to Begin Patient Treatment");
 
-        doctorIdTextField.setText("Doctor ID");
         doctorIdTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doctorIdTextFieldActionPerformed(evt);
