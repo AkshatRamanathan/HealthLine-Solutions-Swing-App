@@ -20,4 +20,5 @@ We have taken the following assumptions:
 
 ## Sequence Diagram
 
-![Sequence Diagram here](./images/SequenceDiagram.png?raw=true)
+![Sequence drawio](https://user-images.githubusercontent.com/113491692/199379615-394077f8-7c9e-4c03-b256-b1690b5ca5f2.png)
+
