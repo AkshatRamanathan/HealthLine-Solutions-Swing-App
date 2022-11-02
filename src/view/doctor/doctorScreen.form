@@ -16,20 +16,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="subTitleLabel1" pref="800" max="32767" attributes="0"/>
+          <Component id="titleLabel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="subTitleLabel1" min="-2" pref="611" max="-2" attributes="0"/>
-                          <Component id="titleLabel" min="-2" pref="611" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
-                      <Component id="nextScreenButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="hospitalDropdown" max="32767" attributes="0"/>
@@ -37,8 +28,12 @@
                           <Component id="validationLabel" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="363" max="-2" attributes="0"/>
+                      <Component id="nextScreenButton" min="-2" pref="72" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="104" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,13 +73,10 @@
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Please Enter your Doctor ID Number below to begin patient treatment"/>
+        <Property name="text" type="java.lang.String" value="Please Enter your Doctor ID Number Below to Begin Patient Treatment"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="doctorIdTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Doctor ID"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorIdTextFieldActionPerformed"/>
       </Events>
