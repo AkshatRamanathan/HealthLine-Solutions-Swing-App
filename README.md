@@ -1,13 +1,17 @@
-# LabThree
+# HealthLine Solutions 
 
-## Description
+## Java Swing Application
+- Professor: Omar Badreldin
+- Course: INFO5100 - Application Engineering & development
+
+## Domain Description
 
 HealthLine Solutions is an application that allows patients, doctors and admins to track hospital and community data from a single platform.
 It allows patients to search and locate doctors based on hospitals in their community.
 The doctors can diagnose vital signs of new or existing patients and tract their health progress by creating encounters.
 The community admins can modify or update data belonging to their community. The system admins have access to all data
 
-## Note
+## Discplaimer
 
 We have taken the following assumptions:
 
